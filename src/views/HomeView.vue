@@ -51,8 +51,8 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
           </div>
         </CarouselItem>
       </CarouselContent>
-      <CarouselPrevious class="fixed left-4 top-1/2 -translate-y-1/2 z-10" />
-      <CarouselNext class="fixed right-4 top-1/2 -translate-y-1/2 z-10" />
+      <CarouselPrevious class="fixed left-8 top-1/2 -translate-y-1/2 z-10" />
+      <CarouselNext class="fixed right-8 top-1/2 -translate-y-1/2 z-10" />
     </Carousel>
 
     <!-- Dots navigation en position fixe -->
