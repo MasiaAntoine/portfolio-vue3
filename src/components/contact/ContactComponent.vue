@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center pt-8 pb-18 max-w-4xl mx-auto">
+  <div class="min-h-screen flex flex-col items-center justify-center pt-8 pb-18 max-w-6xl mx-auto">
     <h1 class="text-4xl font-bold text-gray-800 mb-12">Contact</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
