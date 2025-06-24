@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { watchOnce } from '@vueuse/core'
 import { ref } from 'vue'
-import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
   type CarouselApi,
@@ -36,15 +35,13 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
 </script>
 
 <template>
-  <div class="w-full h-screen">
-    <Carousel class="relative w-full h-full" @init-api="(val) => (emblaMainApi = val)">
-      <CarouselContent>
-        <CarouselItem v-for="item in CarouselMenu" :key="item.id">
-          <Card class="w-full h-screen">
-            <CardContent class="flex items-center justify-center h-full">
-              <component :name="item.name" :is="item.component" />
-            </CardContent>
-          </Card>
+  <div class="w-full">
+    <Carousel @init-api="(val) => (emblaMainApi = val)">
+      <CarouselContent class="h-full">
+        <CarouselItem class="h-full" v-for="item in CarouselMenu" :key="item.id">
+          <div class="h-full overflow-y-auto">
+            <component :name="item.name" :is="item.component" />
+          </div>
         </CarouselItem>
       </CarouselContent>
       <CarouselPrevious class="fixed left-4 top-1/2 -translate-y-1/2 z-10" />
