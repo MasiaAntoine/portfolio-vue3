@@ -38,9 +38,16 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
   <div class="w-full">
     <Carousel @init-api="(val) => (emblaMainApi = val)">
       <CarouselContent class="h-full">
-        <CarouselItem class="h-full" v-for="item in CarouselMenu" :key="item.id">
+        <CarouselItem class="h-full" v-for="(item, index) in CarouselMenu" :key="item.id">
           <div class="h-full overflow-y-auto">
-            <component :name="item.name" :is="item.component" />
+            <Transition name="carousel-slide" mode="out-in" :duration="{ enter: 300, leave: 200 }">
+              <component
+                v-if="index === selectedIndex"
+                :name="item.name"
+                :is="item.component"
+                :key="`${item.id}-${selectedIndex}`"
+              />
+            </Transition>
           </div>
         </CarouselItem>
       </CarouselContent>
@@ -68,3 +75,30 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Transitions pour le carousel */
+.carousel-slide-enter-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide-enter-from {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.carousel-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.carousel-slide-enter-to,
+.carousel-slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+</style>

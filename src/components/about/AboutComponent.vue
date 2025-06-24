@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen p-8 max-w-4xl mx-auto">
+  <div class="min-h-screen flex flex-col items-center justify-center p-8 max-w-4xl mx-auto">
     <div class="text-center space-y-6">
       <h1 class="text-4xl font-bold text-gray-800 mb-8">À propos de moi</h1>
 
