@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center h-full p-8 max-w-6xl mx-auto">
+  <div class="flex flex-col items-center justify-center h-full pt-8 pb-18 max-w-6xl mx-auto">
     <!-- Hero Section -->
     <div class="text-center space-y-8">
       <!-- Avatar/Photo -->
@@ -41,33 +41,19 @@ onMounted(() => {
         <p class="text-xl md:text-2xl text-gray-600 font-light">Développeur Full Stack passionné</p>
       </div>
 
-      <!-- Description -->
+      <!-- Description courte -->
       <div
-        class="max-w-3xl mx-auto transform transition-all duration-1000 delay-500"
+        class="max-w-2xl mx-auto transform transition-all duration-1000 delay-500"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
-        <p class="text-lg text-gray-700 leading-relaxed mb-4">
-          <em class="text-blue-600 font-medium"
-            >"Les erreurs d'hier sont les leçons d'aujourd'hui pour le développeur de demain."</em
-          >
-        </p>
         <p class="text-lg text-gray-700 leading-relaxed mb-8">
-          Diplômé du BTS SIO (Bac+2), passionné de code depuis 2014, je suis devenu un développeur
-          déterminé, polyvalent et autodidacte. Ma passion pour le développement est un moteur
-          puissant qui alimente la créativité et la résolution de problèmes. Toujours en quête
-          d'apprentissage, ma créativité, ma logique et mon autonomie me permettent de trouver des
-          solutions originales avec <span class="font-semibold text-blue-600">Vue.js</span>,
-          <span class="font-semibold text-blue-600">TypeScript</span>,
-          <span class="font-semibold text-blue-600">PHP</span>,
-          <span class="font-semibold text-blue-600">Laravel</span>,
-          <span class="font-semibold text-blue-600">C#</span>,
-          <span class="font-semibold text-blue-600">Java</span>,
-          <span class="font-semibold text-blue-600">Spring Boot</span> et
-          <span class="font-semibold text-blue-600">Rust</span>.
+          Développeur Full Stack passionné depuis 2014, spécialisé dans la création de solutions web
+          modernes et innovantes. Toujours en quête d'apprentissage et de nouveaux défis
+          technologiques.
         </p>
       </div>
 
-      <!-- Technologies principales -->
+      <!-- Technologies principales (complètes) -->
       <div
         class="flex flex-wrap justify-center gap-4 mb-12 transform transition-all duration-1000 delay-700"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
@@ -217,7 +203,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Stats -->
+      <!-- Stats simplifiées -->
       <div
         class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto transform transition-all duration-1000 delay-1000"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
@@ -238,60 +224,9 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Section Minecraft & Passion -->
-      <div
-        class="max-w-4xl mx-auto mt-16 transform transition-all duration-1000 delay-1300"
-        :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
-      >
-        <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 shadow-lg">
-          <div class="flex items-center justify-center mb-6">
-            <div
-              class="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold"
-            >
-              ⛏️
-            </div>
-          </div>
-          <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">
-            Minecraft, mon premier pas en programmation
-          </h3>
-          <p class="text-gray-700 leading-relaxed text-center">
-            Je suis passionné par la programmation depuis ma découverte de Minecraft, où j'ai été
-            fasciné par la façon dont les commandes et les scripts pouvaient être utilisés pour
-            créer des mondes uniques et complexes. Cette découverte a été le catalyseur de ma
-            passion pour le développement, me montrant que
-            <span class="font-semibold text-green-600"
-              >la programmation est une passion passionnante et gratifiante</span
-            >
-            qui offre une grande polyvalence pour créer des choses incroyables et résoudre des
-            problèmes complexes.
-          </p>
-        </div>
-      </div>
-
-      <!-- Section Objectifs & Vision -->
-      <div
-        class="max-w-4xl mx-auto mt-12 transform transition-all duration-1000 delay-1400"
-        :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
-      >
-        <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg">
-          <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Avenir Professionnel</h3>
-          <p class="text-gray-700 leading-relaxed text-center mb-4">
-            En tant qu'entrepreneur ambitieux, mon objectif à court terme est de créer une
-            entreprise qui apporte une réelle valeur ajoutée à mon écosystème et améliore la vie des
-            gens.
-          </p>
-          <p class="text-gray-700 leading-relaxed text-center">
-            Pour atteindre cet objectif, je vais devenir expert en programmation en investissant du
-            temps et de l'énergie dans ma formation, capable de fournir des
-            <span class="font-semibold text-purple-600">solutions innovantes et concrètes</span>
-            à mes clients.
-          </p>
-        </div>
-      </div>
-
       <!-- Call to action -->
       <div
-        class="flex flex-col sm:flex-row gap-4 justify-center mt-12 transform transition-all duration-1000 delay-1500"
+        class="flex flex-col sm:flex-row gap-4 justify-center mt-12 transform transition-all duration-1000 delay-1200"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
         <button
@@ -303,7 +238,7 @@ onMounted(() => {
         <button
           class="bg-gradient-to-r from-green-500 to-teal-600 text-white px-8 py-4 rounded-full font-semibold hover:from-green-600 hover:to-teal-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
         >
-          Télécharger mon CV
+          En savoir plus
         </button>
 
         <button
