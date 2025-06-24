@@ -66,22 +66,5 @@
         </p>
       </div>
     </div>
-
-    <!-- Section Objectifs & Vision -->
-    <div class="max-w-4xl mx-auto">
-      <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Avenir Professionnel</h3>
-        <p class="text-gray-700 leading-relaxed text-center mb-4">
-          En tant qu'entrepreneur ambitieux, mon objectif à court terme est de créer une entreprise
-          qui apporte une réelle valeur ajoutée à mon écosystème et améliore la vie des gens.
-        </p>
-        <p class="text-gray-700 leading-relaxed text-center">
-          Pour atteindre cet objectif, je vais devenir expert en programmation en investissant du
-          temps et de l'énergie dans ma formation, capable de fournir des
-          <span class="font-semibold text-purple-600">solutions innovantes et concrètes</span>
-          à mes clients.
-        </p>
-      </div>
-    </div>
   </div>
 </template>
