@@ -37,25 +37,12 @@ const downloadCV = async () => {
       format: 'a4',
     })
 
-    // Calculer les dimensions pour ajuster à A4
+    // Dimensions A4 exactes
     const imgWidth = 210 // A4 width in mm
-    const pageHeight = 297 // A4 height in mm
-    const imgHeight = (canvas.height * imgWidth) / canvas.width
-    let heightLeft = imgHeight
+    const imgHeight = 297 // A4 height in mm
 
-    let position = 0
-
-    // Ajouter la première page
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-    heightLeft -= pageHeight
-
-    // Ajouter des pages supplémentaires si nécessaire
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight
-      pdf.addPage()
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-      heightLeft -= pageHeight
-    }
+    // Ajouter l'image avec les dimensions A4 exactes
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight)
 
     // Télécharger le PDF
     pdf.save(`CV_${profilData.personal.firstName}_${profilData.personal.lastName}.pdf`)
@@ -99,137 +86,158 @@ onMounted(async () => {
     </div>
 
     <!-- CV Container -->
-    <div id="cv" class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden relative">
+    <div
+      id="cv"
+      class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden relative h-[1122px]"
+    >
       <!-- En-tête -->
-      <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4">
-        <div class="flex flex-col md:flex-row items-center gap-3">
+      <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-3 h-[120px]">
+        <div class="flex flex-col md:flex-row items-center gap-2 h-full">
           <div class="flex-1">
-            <h1 class="text-2xl font-bold mb-1">
+            <h1 class="text-xl font-bold mb-1">
               {{ profilData.personal.firstName }} {{ profilData.personal.lastName }}
             </h1>
-            <h2 class="text-sm font-light mb-2 opacity-90">
+            <h2 class="text-xs font-light mb-1 opacity-90">
               {{ profilData.personal.title }}
             </h2>
-            <p class="text-xs leading-relaxed opacity-90 w-[90%]">
+            <p class="text-[10px] leading-tight opacity-90 w-[90%]">
               {{ profilData.personal.description }}
             </p>
           </div>
 
           <!-- Statistiques -->
-          <div class="flex flex-row md:flex-col gap-2 text-center">
-            <div class="bg-white/10 rounded-lg p-2 backdrop-blur-sm">
-              <div class="text-lg font-bold">
+          <div class="flex flex-row md:flex-col gap-1 text-center">
+            <div class="bg-white/10 rounded p-1.5 backdrop-blur-sm">
+              <div class="text-sm font-bold">
                 {{ profilData.stats.yearsOfExperience }}
               </div>
-              <div class="text-[10px] opacity-80">Années d'exp.</div>
+              <div class="text-[8px] opacity-80">Années d'exp.</div>
             </div>
-            <div class="bg-white/10 rounded-lg p-2 backdrop-blur-sm">
-              <div class="text-lg font-bold">
+            <div class="bg-white/10 rounded p-1.5 backdrop-blur-sm">
+              <div class="text-sm font-bold">
                 {{ profilData.stats.technologiesMastered }}
               </div>
-              <div class="text-[10px] opacity-80">Technologies</div>
+              <div class="text-[8px] opacity-80">Technologies</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 h-[1002px]">
         <!-- Colonne de gauche -->
-        <div class="lg:col-span-1 bg-gray-50 p-6 flex flex-col">
-          <!-- Contact -->
-          <div class="mb-8">
-            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-              <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-              Contact
-            </h3>
-            <div class="space-y-3 text-sm">
-              <div class="flex items-center gap-2">
-                <span class="text-blue-600">📧</span>
-                <span class="text-gray-700">{{ profilData.contact.email }}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-blue-600">📱</span>
-                <span class="text-gray-700">{{ profilData.contact.phone }}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-blue-600">📍</span>
-                <span class="text-gray-700">{{ profilData.contact.location }}</span>
+        <div class="bg-gray-50 flex flex-col p-4 justify-between">
+          <div class="col-span-1 flex flex-col gap-4">
+            <!-- À propos -->
+            <div>
+              <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
+                À propos
+              </h3>
+              <p class="text-gray-700 text-[10px] leading-tight mb-2">
+                {{ profilData.personal.aboutDescription }}
+              </p>
+              <div class="bg-blue-50 border-l-2 border-blue-600 p-1.5 rounded-r">
+                <p class="text-blue-800 text-[10px] italic font-medium">
+                  "{{ profilData.personal.quote }}"
+                </p>
               </div>
             </div>
-          </div>
 
-          <!-- Réseaux sociaux -->
-          <div class="mb-8">
-            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-              <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-              Réseaux
-            </h3>
-            <div class="space-y-2 text-sm">
-              <div
-                v-for="social in profilData.contact.socialNetworks"
-                :key="social.name"
-                class="flex items-center gap-2"
-              >
-                <component :is="social.icon" class="w-4 h-4 text-blue-600" />
-                <span class="text-gray-700 text-xs break-all">{{ social.url }}</span>
+            <!-- Contact -->
+            <div>
+              <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
+                Contact
+              </h3>
+              <div class="space-y-1.5 text-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-blue-600">📧</span>
+                  <span class="text-gray-700">{{ profilData.contact.email }}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-blue-600">📱</span>
+                  <span class="text-gray-700">{{ profilData.contact.phone }}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-blue-600">📍</span>
+                  <span class="text-gray-700">{{ profilData.contact.location }}</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Qualités -->
-          <div class="mb-8">
-            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-              <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-              Qualités
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="(quality, index) in profilData.qualities"
-                :key="quality"
-                :class="[
-                  'px-3 py-1 rounded-full text-xs font-medium',
-                  index % 6 === 0
-                    ? 'bg-blue-100 text-blue-800'
-                    : index % 6 === 1
-                      ? 'bg-green-100 text-green-800'
-                      : index % 6 === 2
-                        ? 'bg-purple-100 text-purple-800'
-                        : index % 6 === 3
-                          ? 'bg-orange-100 text-orange-800'
-                          : index % 6 === 4
-                            ? 'bg-teal-100 text-teal-800'
-                            : 'bg-pink-100 text-pink-800',
-                ]"
-              >
-                {{ quality }}
-              </span>
+            <!-- Réseaux sociaux -->
+            <div>
+              <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
+                Réseaux
+              </h3>
+              <div class="space-y-1 text-xs">
+                <div
+                  v-for="social in profilData.contact.socialNetworks"
+                  :key="social.name"
+                  class="flex items-center gap-1.5"
+                >
+                  <component :is="social.icon" class="w-3 h-3 text-blue-600" />
+                  <span class="text-gray-700 text-[10px] break-all">{{ social.url }}</span>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <!-- Compétences principales -->
-          <div class="mb-8">
-            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-              <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-              Compétences clés
-            </h3>
-            <div class="space-y-4">
-              <div v-for="category in skills" :key="category.name">
-                <div v-if="category.skills.filter((skill) => skill.cv).length > 0">
-                  <h4 class="text-sm font-semibold text-gray-700 mb-2">{{ category.name }}</h4>
-                  <div class="space-y-2">
-                    <div
-                      v-for="skill in category.skills.filter((skill) => skill.cv)"
-                      :key="skill.name"
-                      class="flex justify-between items-center"
-                    >
-                      <span class="text-xs text-gray-600">{{ skill.name }}</span>
-                      <div class="flex space-x-1">
-                        <div
-                          v-for="(filled, index) in getLevelStars(skill.level)"
-                          :key="index"
-                          :class="filled ? 'bg-blue-600' : 'bg-gray-300'"
-                          class="w-2 h-2 rounded-full"
-                        ></div>
+            <!-- Qualités -->
+            <div>
+              <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
+                Qualités
+              </h3>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  v-for="(quality, index) in profilData.qualities"
+                  :key="quality"
+                  :class="[
+                    'px-2 py-0.5 rounded-full text-[10px] font-medium',
+                    index % 6 === 0
+                      ? 'bg-blue-100 text-blue-800'
+                      : index % 6 === 1
+                        ? 'bg-green-100 text-green-800'
+                        : index % 6 === 2
+                          ? 'bg-purple-100 text-purple-800'
+                          : index % 6 === 3
+                            ? 'bg-orange-100 text-orange-800'
+                            : index % 6 === 4
+                              ? 'bg-teal-100 text-teal-800'
+                              : 'bg-pink-100 text-pink-800',
+                  ]"
+                >
+                  {{ quality }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Compétences principales -->
+            <div>
+              <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
+                Compétences clés
+              </h3>
+              <div class="space-y-2">
+                <div v-for="category in skills" :key="category.name">
+                  <div v-if="category.skills.filter((skill) => skill.cv).length > 0">
+                    <h4 class="text-xs font-semibold text-gray-700 mb-1">{{ category.name }}</h4>
+                    <div class="space-y-1">
+                      <div
+                        v-for="skill in category.skills.filter((skill) => skill.cv)"
+                        :key="skill.name"
+                        class="flex justify-between items-center"
+                      >
+                        <span class="text-[10px] text-gray-600">{{ skill.name }}</span>
+                        <div class="flex space-x-0.5">
+                          <div
+                            v-for="(filled, index) in getLevelStars(skill.level)"
+                            :key="index"
+                            :class="filled ? 'bg-blue-600' : 'bg-gray-300'"
+                            class="w-1.5 h-1.5 rounded-full"
+                          ></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -239,15 +247,15 @@ onMounted(async () => {
           </div>
 
           <!-- QR Code -->
-          <div class="w-full mt-auto">
-            <div class="bg-white w-[9rem] p-2 rounded-lg shadow-lg border mx-auto">
+          <div class="w-full">
+            <div class="bg-white w-20 p-1.5 rounded shadow border mx-auto">
               <img
                 v-if="qrCodeDataUrl"
                 :src="qrCodeDataUrl"
                 alt="QR Code Portfolio"
-                class="size-24 mx-auto"
+                class="size-10 mx-auto"
               />
-              <p class="text-[9px] text-gray-600 text-center mt-1">
+              <p class="text-[8px] text-gray-600 text-center mt-0.5">
                 {{ profilData.personal.urlPortfolio }}
               </p>
             </div>
@@ -255,57 +263,43 @@ onMounted(async () => {
         </div>
 
         <!-- Colonne de droite -->
-        <div class="lg:col-span-2 p-6">
-          <!-- À propos -->
-          <section class="mb-8">
-            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-              <span class="w-3 h-3 bg-blue-600 rounded-full mr-3"></span>
-              À propos
-            </h3>
-            <p class="text-gray-700 text-sm leading-relaxed mb-4">
-              {{ profilData.personal.aboutDescription }}
-            </p>
-            <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg">
-              <p class="text-blue-800 text-sm italic font-medium">
-                "{{ profilData.personal.quote }}"
-              </p>
-            </div>
-          </section>
-
+        <div class="col-span-2 p-4 flex flex-col gap-5">
           <!-- Expériences -->
-          <section class="mb-8">
-            <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-              <span class="w-3 h-3 bg-blue-600 rounded-full mr-3"></span>
+          <section>
+            <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+              <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
               Expériences professionnelles
             </h3>
-            <div class="space-y-6">
+            <div class="space-y-3">
               <div
                 v-for="experience in experiences.filter((exp) => exp.cv === true)"
                 :key="experience.id"
-                class="border-l-2 border-gray-200 pl-6 relative"
+                class="border-l-2 border-gray-200 pl-4 relative"
               >
                 <div
-                  :class="`absolute -left-2 top-0 w-4 h-4 rounded-full bg-${experience.color}-600`"
+                  :class="`absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-${experience.color}-600`"
                 ></div>
-                <div class="mb-2">
-                  <h4 class="text-lg font-semibold text-gray-800">{{ experience.title }}</h4>
-                  <div class="flex flex-wrap items-center gap-2 text-sm text-gray-600 mb-2">
+                <div class="mb-1">
+                  <h4 class="text-sm font-semibold text-gray-800">{{ experience.title }}</h4>
+                  <div class="flex flex-wrap items-center gap-1 text-xs text-gray-600 mb-1">
                     <span class="font-medium">{{ experience.company }}</span>
-                    <span class="px-2 py-1 bg-gray-100 rounded text-xs">{{ experience.type }}</span>
+                    <span class="px-1.5 py-0.5 bg-gray-100 rounded text-[10px]">{{
+                      experience.type
+                    }}</span>
                   </div>
-                  <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-3">
+                  <div class="flex flex-wrap items-center gap-3 text-[10px] text-gray-500 mb-2">
                     <span>📅 {{ experience.period }}</span>
                     <span>📍 {{ experience.location }}</span>
                   </div>
                 </div>
-                <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                <p class="text-gray-700 text-xs leading-tight mb-2">
                   {{ experience.description }}
                 </p>
-                <div class="flex flex-wrap gap-1">
+                <div class="flex flex-wrap gap-0.5">
                   <span
                     v-for="skill in experience.skills.slice(0, 8)"
                     :key="skill"
-                    class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs"
+                    class="px-1.5 py-0.5 bg-gray-100 text-gray-700 rounded text-[10px]"
                   >
                     {{ skill }}
                   </span>
@@ -316,42 +310,40 @@ onMounted(async () => {
 
           <!-- Formation -->
           <section>
-            <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-              <span class="w-3 h-3 bg-blue-600 rounded-full mr-3"></span>
+            <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+              <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
               Formation & Certifications
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
               <div
                 v-for="edu in education
                   .filter(
                     (e) =>
                       (e.category === 'diploma' || e.category === 'certification') && e.cv === true,
                   )
-                  .slice(0, 6)"
+                  .slice(0, 8)"
                 :key="edu.id"
-                class="border rounded-lg p-4 bg-gray-50"
+                class="border rounded p-2.5 bg-gray-50 flex items-start gap-2"
               >
-                <div class="flex items-start gap-3">
-                  <span class="text-2xl">{{ edu.icon }}</span>
-                  <div class="flex-1">
-                    <h4 class="font-semibold text-gray-800 text-sm leading-tight mb-1">
-                      {{ edu.title }}
-                    </h4>
-                    <p class="text-xs text-gray-600 mb-1">{{ edu.institution }}</p>
-                    <p class="text-xs text-gray-500 mb-2">{{ edu.date }}</p>
-                    <div v-if="edu.details" class="text-xs text-gray-700 mb-2">
-                      {{ edu.details }}
-                    </div>
-                    <div class="flex flex-wrap gap-1">
-                      <span
-                        v-for="skill in edu.skills.slice(0, 3)"
-                        :key="skill"
-                        :class="edu.badgeBg"
-                        class="px-2 py-1 rounded text-xs"
-                      >
-                        {{ skill }}
-                      </span>
-                    </div>
+                <span class="text-lg">{{ edu.icon }}</span>
+                <div class="flex-1">
+                  <h4 class="font-semibold text-gray-800 text-xs leading-tight mb-0.5">
+                    {{ edu.title }}
+                  </h4>
+                  <p class="text-[10px] text-gray-600 mb-0.5">{{ edu.institution }}</p>
+                  <p class="text-[10px] text-gray-500 mb-1">{{ edu.date }}</p>
+                  <div v-if="edu.details" class="text-[10px] text-gray-700 mb-1 line-clamp-2">
+                    {{ edu.details }}
+                  </div>
+                  <div class="flex flex-wrap gap-0.5">
+                    <span
+                      v-for="skill in edu.skills.slice(0, 4)"
+                      :key="skill"
+                      :class="edu.badgeBg"
+                      class="px-1.5 py-0.5 rounded text-[9px]"
+                    >
+                      {{ skill }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -376,5 +368,14 @@ onMounted(async () => {
   .break-before-page {
     break-before: page;
   }
+}
+
+/* Classe utilitaire pour limiter le texte */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>
