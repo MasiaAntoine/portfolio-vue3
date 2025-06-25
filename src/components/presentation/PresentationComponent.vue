@@ -51,7 +51,7 @@ onMounted(() => {
           :key="skill.name"
           class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300"
         >
-          <div :class="`size-8 bg-${skill.color} rounded-full flex items-center justify-center`">
+          <div :class="`size-8 ${skill.color} rounded-full flex items-center justify-center`">
             <span class="text-white text-xs font-bold">{{ skill.icon }}</span>
           </div>
           <span class="font-medium text-gray-800">{{ skill.name }}</span>

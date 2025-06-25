@@ -19,10 +19,7 @@ const getLevelStars = (level: number) => {
         class="bg-white rounded-lg shadow-lg p-6"
       >
         <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-          <span
-            class="w-3 h-3 rounded-full mr-3"
-            :style="{ backgroundColor: category.color }"
-          ></span>
+          <span :class="`w-3 h-3 rounded-full mr-3 ${category.color}`"></span>
           {{ category.name }}
         </h3>
         <div class="space-y-3">
