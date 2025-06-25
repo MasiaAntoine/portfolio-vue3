@@ -97,16 +97,16 @@ onMounted(async () => {
     <!-- CV Container -->
     <div
       id="cv"
-      class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden relative h-[1122px] font-inter"
+      class="max-w-4xl mx-auto bg-white shadow-2xl overflow-hidden relative h-[1122px] font-inter"
     >
       <!-- En-tête -->
-      <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-3 h-[120px]">
+      <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-5 h-[120px]">
         <div class="flex flex-col md:flex-row items-center gap-2 h-full">
           <div class="flex-1">
-            <h1 class="text-2xl font-bold mb-1">
+            <h1 class="text-xl font-bold">
               {{ profilData.personal.firstName }} {{ profilData.personal.lastName }}
             </h1>
-            <h2 class="text-lg font-light mb-1 opacity-90">
+            <h2 class="text-lg font-light opacity-90">
               {{ profilData.personal.title }}
             </h2>
             <p class="text-[10px] leading-relaxed opacity-90 w-[90%]">
