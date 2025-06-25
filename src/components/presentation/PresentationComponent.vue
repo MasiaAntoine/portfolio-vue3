@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { presentationSkills } from '@/shared/Skills'
+import { Button } from '@/components/ui/button'
+import { ChevronDown } from 'lucide-vue-next'
 
 const isVisible = ref(false)
 const showAllSkills = ref(false)
@@ -81,26 +83,13 @@ onMounted(() => {
 
         <!-- Bouton Voir plus / Voir moins -->
         <div v-if="shouldShowToggle" class="text-center mb-6">
-          <button
-            @click="showAllSkills = !showAllSkills"
-            class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
+          <Button variant="gradient" @click="showAllSkills = !showAllSkills" class="px-6 py-2">
             <span class="mr-2">{{ showAllSkills ? 'Voir moins' : 'Voir plus' }}</span>
-            <svg
+            <ChevronDown
               :class="{ 'rotate-180': showAllSkills }"
               class="w-4 h-4 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
+            />
+          </Button>
         </div>
       </div>
 
