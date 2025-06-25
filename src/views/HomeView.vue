@@ -18,6 +18,9 @@ const selectedIndex = ref(0)
 function onSelect() {
   if (!emblaMainApi.value) return
   selectedIndex.value = emblaMainApi.value.selectedScrollSnap()
+
+  // Remonter le scroll tout en haut à chaque changement d'item
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 function onThumbClick(index: number) {
