@@ -8,25 +8,28 @@ import QRCode from 'qrcode'
 import html2canvas from 'html2canvas-pro'
 import jsPDF from 'jspdf'
 
-// Fonction pour générer les étoiles de niveau
 const getLevelStars = (level: number) => {
   return Array.from({ length: 5 }, (_, i) => i < level)
 }
 
-// Fonction pour télécharger le CV en PDF
 const downloadCV = async () => {
   try {
     const element = document.getElementById('cv')
     if (!element) return
 
-    // Générer le canvas avec html2canvas-pro
+    await document.fonts.ready
+
     const canvas = await html2canvas(element, {
-      scale: 2, // Meilleure qualité
+      scale: 5,
       useCORS: true,
       allowTaint: true,
       backgroundColor: '#ffffff',
       width: element.scrollWidth,
       height: element.scrollHeight,
+      letterRendering: true,
+      logging: false,
+      removeContainer: false,
+      foreignObjectRendering: false,
     })
 
     // Créer le PDF avec jsPDF
@@ -37,14 +40,11 @@ const downloadCV = async () => {
       format: 'a4',
     })
 
-    // Dimensions A4 exactes
-    const imgWidth = 210 // A4 width in mm
-    const imgHeight = 297 // A4 height in mm
+    const imgWidth = 210
+    const imgHeight = 297
 
-    // Ajouter l'image avec les dimensions A4 exactes
     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight)
 
-    // Télécharger le PDF
     pdf.save(`CV_${profilData.personal.firstName}_${profilData.personal.lastName}.pdf`)
   } catch (error) {
     console.error('Erreur lors de la génération du PDF:', error)
@@ -52,12 +52,10 @@ const downloadCV = async () => {
   }
 }
 
-// QR Code
 const qrCodeDataUrl = ref('')
 
 onMounted(async () => {
   try {
-    // Générer le QR code pour l'URL du portfolio
     qrCodeDataUrl.value = await QRCode.toDataURL(profilData.personal.urlPortfolio, {
       width: 124,
       margin: 1,
@@ -100,7 +98,7 @@ onMounted(async () => {
             <h2 class="text-xs font-light mb-1 opacity-90">
               {{ profilData.personal.title }}
             </h2>
-            <p class="text-[10px] leading-tight opacity-90 w-[90%]">
+            <p class="text-[10px] leading-relaxed opacity-90 w-[90%]">
               {{ profilData.personal.description }}
             </p>
           </div>
@@ -133,7 +131,7 @@ onMounted(async () => {
                 <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
                 À propos
               </h3>
-              <p class="text-gray-700 text-[10px] leading-tight mb-2">
+              <p class="text-gray-700 text-[10px] leading-relaxed mb-2">
                 {{ profilData.personal.aboutDescription }}
               </p>
               <div class="bg-blue-50 border-l-2 border-blue-600 p-1.5 rounded-r">
@@ -292,7 +290,7 @@ onMounted(async () => {
                     <span>📍 {{ experience.location }}</span>
                   </div>
                 </div>
-                <p class="text-gray-700 text-xs leading-tight mb-2">
+                <p class="text-gray-700 text-xs leading-relaxed mb-2">
                   {{ experience.description }}
                 </p>
                 <div class="flex flex-wrap gap-0.5">
@@ -327,7 +325,7 @@ onMounted(async () => {
               >
                 <span class="text-lg">{{ edu.icon }}</span>
                 <div class="flex-1">
-                  <h4 class="font-semibold text-gray-800 text-xs leading-tight mb-0.5">
+                  <h4 class="font-semibold text-gray-800 text-xs leading-relaxed mb-0.5">
                     {{ edu.title }}
                   </h4>
                   <p class="text-[10px] text-gray-600 mb-0.5">{{ edu.institution }}</p>
@@ -377,5 +375,43 @@ onMounted(async () => {
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Amélioration du rendu pour PDF */
+#cv {
+  font-feature-settings: 'kern' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cv * {
+  letter-spacing: 0.01em;
+  word-spacing: 0.05em;
+}
+
+/* Espacement spécifique pour les petits textes */
+#cv .text-\[10px\] {
+  letter-spacing: 0.02em;
+  word-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+#cv .text-xs {
+  letter-spacing: 0.015em;
+  word-spacing: 0.06em;
+  line-height: 1.3;
+}
+
+#cv .text-\[8px\] {
+  letter-spacing: 0.025em;
+  word-spacing: 0.1em;
+  line-height: 1.5;
+}
+
+#cv .text-\[9px\] {
+  letter-spacing: 0.02em;
+  word-spacing: 0.08em;
+  line-height: 1.4;
 }
 </style>
