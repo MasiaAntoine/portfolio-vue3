@@ -18,7 +18,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center pt-8 pb-18 max-w-6xl mx-auto">
+  <div
+    class="min-h-screen flex flex-col items-center justify-center pt-8 pb-18 px-4 sm:px-26 max-w-6xl mx-auto"
+  >
     <!-- Hero Section -->
     <div class="text-center space-y-8">
       <!-- Nom et titre -->
@@ -38,12 +40,13 @@ onMounted(() => {
 
       <!-- Description courte -->
       <div
-        class="max-w-2xl mx-auto transform transition-all duration-1000 delay-500"
+        class="max-w-2xl mx-auto transform transition-all duration-1000 delay-500 relative z-10 flex gap-4 items-center"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        <p class="text-lg text-gray-700 leading-relaxed">
           {{ profilData.personal.description }}
         </p>
+        <img src="@/assets/images/fascinate.png" alt="fascinate illustration" class="w-[16rem]" />
       </div>
 
       <!-- Technologies principales (dynamiques) -->
@@ -51,12 +54,11 @@ onMounted(() => {
         class="transform transition-all duration-1000 delay-700"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
-        <div class="flex flex-wrap justify-center gap-4 mb-6">
-          <!-- Skills toujours visibles (les 14 premiers) -->
+        <div class="flex flex-wrap justify-center gap-4 mb-6 relative">
           <div
-            v-for="skill in presentationSkills.slice(0, 14)"
+            v-for="skill in presentationSkills.slice(0, 10)"
             :key="skill.name"
-            class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300"
+            class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300 relative z-10"
           >
             <div :class="`size-8 ${skill.color} rounded-full flex items-center justify-center`">
               <span class="text-white text-xs font-bold">{{ skill.icon }}</span>
@@ -64,10 +66,9 @@ onMounted(() => {
             <span class="font-medium text-gray-800">{{ skill.name }}</span>
           </div>
 
-          <!-- Skills supplémentaires avec animation -->
           <transition-group name="fade-slide" tag="div" class="contents">
             <div
-              v-for="(skill, index) in presentationSkills.slice(14)"
+              v-for="(skill, index) in presentationSkills.slice(10)"
               v-show="showAllSkills"
               :key="skill.name"
               class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300"
