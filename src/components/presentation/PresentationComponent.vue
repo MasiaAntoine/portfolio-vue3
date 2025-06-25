@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { presentationSkills } from '@/shared/Skills'
 
 const isVisible = ref(false)
+const showAllSkills = ref(false)
+
+const shouldShowToggle = computed(() => presentationSkills.length > 14)
 
 onMounted(() => {
   setTimeout(() => {
@@ -43,18 +46,61 @@ onMounted(() => {
 
       <!-- Technologies principales (dynamiques) -->
       <div
-        class="flex flex-wrap justify-center gap-4 mb-12 transform transition-all duration-1000 delay-700"
+        class="transform transition-all duration-1000 delay-700"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
-        <div
-          v-for="skill in presentationSkills"
-          :key="skill.name"
-          class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300"
-        >
-          <div :class="`size-8 ${skill.color} rounded-full flex items-center justify-center`">
-            <span class="text-white text-xs font-bold">{{ skill.icon }}</span>
+        <div class="flex flex-wrap justify-center gap-4 mb-6">
+          <!-- Skills toujours visibles (les 14 premiers) -->
+          <div
+            v-for="skill in presentationSkills.slice(0, 14)"
+            :key="skill.name"
+            class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300"
+          >
+            <div :class="`size-8 ${skill.color} rounded-full flex items-center justify-center`">
+              <span class="text-white text-xs font-bold">{{ skill.icon }}</span>
+            </div>
+            <span class="font-medium text-gray-800">{{ skill.name }}</span>
           </div>
-          <span class="font-medium text-gray-800">{{ skill.name }}</span>
+
+          <!-- Skills supplémentaires avec animation -->
+          <transition-group name="fade-slide" tag="div" class="contents">
+            <div
+              v-for="(skill, index) in presentationSkills.slice(14)"
+              v-show="showAllSkills"
+              :key="skill.name"
+              class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300"
+              :style="showAllSkills ? { transitionDelay: `${index * 50}ms` } : {}"
+            >
+              <div :class="`size-8 ${skill.color} rounded-full flex items-center justify-center`">
+                <span class="text-white text-xs font-bold">{{ skill.icon }}</span>
+              </div>
+              <span class="font-medium text-gray-800">{{ skill.name }}</span>
+            </div>
+          </transition-group>
+        </div>
+
+        <!-- Bouton Voir plus / Voir moins -->
+        <div v-if="shouldShowToggle" class="text-center mb-6">
+          <button
+            @click="showAllSkills = !showAllSkills"
+            class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            <span class="mr-2">{{ showAllSkills ? 'Voir moins' : 'Voir plus' }}</span>
+            <svg
+              :class="{ 'rotate-180': showAllSkills }"
+              class="w-4 h-4 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -81,3 +127,29 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-slide-enter-active {
+  transition: all 0.4s ease-out;
+}
+
+.fade-slide-leave-active {
+  transition: none;
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.9);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.9);
+}
+
+.fade-slide-enter-to,
+.fade-slide-leave-from {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+</style>
