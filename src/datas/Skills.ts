@@ -3,6 +3,7 @@ export interface Skill {
   level: number // 1-5
   icon?: string
   color: string
+  cv?: boolean
 }
 
 export interface SkillCategory {

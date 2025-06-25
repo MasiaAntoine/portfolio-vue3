@@ -12,6 +12,7 @@ export interface Education {
   badgeBg: string
   icon: string
   category: 'diploma' | 'certification' | 'license' | 'other'
+  cv?: boolean
 }
 
 export const education: Education[] = [

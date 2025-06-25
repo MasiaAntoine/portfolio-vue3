@@ -8,6 +8,7 @@ export interface Experience {
   description: string
   skills: string[]
   color: string
+  cv?: boolean
 }
 
 export const experiences: Experience[] = [

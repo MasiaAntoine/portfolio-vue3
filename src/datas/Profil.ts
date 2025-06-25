@@ -18,6 +18,7 @@ export interface ProfilData {
     quote: string
     aboutDescription: string
     minecraftDescription: string
+    urlPortfolio: string
   }
   stats: {
     yearsOfExperience: number
