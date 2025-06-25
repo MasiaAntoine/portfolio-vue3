@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { Circle } from 'lucide-vue-next'
-import { CarouselMenu } from '@/shared/CarouselMenu'
+import { CarouselMenu } from '@/datas/CarouselMenu'
 
 const emblaMainApi = ref<CarouselApi>()
 const selectedIndex = ref(0)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { skills } from '@/shared/Skills'
+import { skills } from '@/datas/Skills'
 
 // Fonction pour générer les étoiles de niveau
 const getLevelStars = (level: number) => {

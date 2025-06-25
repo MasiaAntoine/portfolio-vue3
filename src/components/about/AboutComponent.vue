@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { profilData } from '@/shared/Profil'
+import { profilData } from '@/datas/Profil'
 </script>
 
 <template>

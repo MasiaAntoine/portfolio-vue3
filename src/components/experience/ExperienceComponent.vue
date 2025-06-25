@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { experiences } from '@/shared/Experiences'
+import { experiences } from '@/datas/Experiences'
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
 const timelineContainer = ref<HTMLElement>()

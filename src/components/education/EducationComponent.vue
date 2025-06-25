@@ -45,5 +45,5 @@
 </template>
 
 <script setup lang="ts">
-import { education } from '@/shared/Education'
+import { education } from '@/datas/Education'
 </script>

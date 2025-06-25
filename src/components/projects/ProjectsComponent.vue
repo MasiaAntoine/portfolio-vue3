@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { projects } from '@/shared/Projects'
+import { projects } from '@/datas/Projects'
 import { Button } from '@/components/ui/button'
 
 // Fonction pour obtenir la couleur selon la technologie

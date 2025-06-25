@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { presentationSkills } from '@/shared/Skills'
-import { profilData } from '@/shared/Profil'
+import { presentationSkills } from '@/datas/Skills'
+import { profilData } from '@/datas/Profil'
 import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-vue-next'
 
@@ -103,7 +103,7 @@ onMounted(() => {
           <div class="text-3xl font-bold text-blue-600 mb-2">
             {{ profilData.stats.yearsOfExperience }}+
           </div>
-          <div class="text-gray-600">Années de passion</div>
+          <div class="text-gray-600">Années d'expériences</div>
         </div>
 
         <div class="text-center">

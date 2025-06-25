@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { profilData } from '@/shared/Profil'
-import { skills } from '@/shared/Skills'
-import { education } from '@/shared/Education'
-import { experiences } from '@/shared/Experiences'
+import { profilData } from '@/datas/Profil'
+import { skills } from '@/datas/Skills'
+import { education } from '@/datas/Education'
+import { experiences } from '@/datas/Experiences'
 import { ref, onMounted } from 'vue'
 import QRCode from 'qrcode'
 import { Button } from '@/components/ui/button'

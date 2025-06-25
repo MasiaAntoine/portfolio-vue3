@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { profilData } from '@/shared/Profil'
+import { profilData } from '@/datas/Profil'
 
 // États réactifs pour contrôler l'affichage
 const showEmail = ref(false)
