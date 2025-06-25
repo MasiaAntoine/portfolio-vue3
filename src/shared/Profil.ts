@@ -63,21 +63,21 @@ export const profilData: ProfilData = {
     socialNetworks: [
       {
         name: 'LinkedIn',
-        url: 'https://fr.linkedin.com/in/antoine-masia-403a17228',
+        url: 'fr.linkedin.com/in/antoine-masia-403a17228',
         icon: Linkedin,
         colorClass: 'bg-blue-600',
         hoverColorClass: 'hover:bg-blue-700',
       },
       {
         name: 'GitHub',
-        url: 'https://github.com/MasiaAntoine',
+        url: 'github.com/MasiaAntoine',
         icon: Github,
         colorClass: 'bg-gray-800',
         hoverColorClass: 'hover:bg-gray-700',
       },
       {
         name: 'Instagram',
-        url: 'https://www.instagram.com/antoine.masia/',
+        url: 'www.instagram.com/antoine.masia/',
         icon: Instagram,
         colorClass: 'bg-pink-600',
         hoverColorClass: 'hover:bg-pink-700',

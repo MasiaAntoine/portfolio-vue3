@@ -5,77 +5,42 @@ import { education } from '@/shared/Education'
 import { experiences } from '@/shared/Experiences'
 import { ref, onMounted } from 'vue'
 import QRCode from 'qrcode'
-import html2canvas from 'html2canvas-pro'
-import jsPDF from 'jspdf'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-vue-next'
+import { generatePDF, sanitizeFilename } from '@/shared/utils'
 
 const getLevelStars = (level: number) => {
   return Array.from({ length: 5 }, (_, i) => i < level)
 }
 
 const isGeneratingPDF = ref(false)
+const generationStep = ref('')
 
 const downloadCV = async () => {
   try {
     isGeneratingPDF.value = true
-    const element = document.getElementById('cv')
-    if (!element) return
 
-    await document.fonts.ready
+    const firstName = sanitizeFilename(profilData.personal.firstName)
+    const lastName = sanitizeFilename(profilData.personal.lastName)
+    const filename = `CV_${firstName}_${lastName}.pdf`
 
-    const fontFaces = Array.from(document.fonts.values())
-    const interFonts = fontFaces.filter((font) => font.family.includes('Inter'))
-
-    await Promise.all(interFonts.map((font) => font.load()))
-
-    const canvas = await html2canvas(element, {
-      scale: 4,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: '#ffffff',
-      width: element.scrollWidth,
-      height: element.scrollHeight,
-      letterRendering: true,
-      logging: false,
-      removeContainer: false,
-      foreignObjectRendering: false,
-      onclone: (clonedDoc) => {
-        const clonedElement = clonedDoc.getElementById('cv')
-        if (clonedElement) {
-          clonedElement.style.fontFamily =
-            'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-
-          const allElements = clonedElement.querySelectorAll('*')
-          allElements.forEach((el: HTMLElement) => {
-            if (el.style) {
-              el.style.fontFamily =
-                'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-            }
-          })
-        }
+    await generatePDF({
+      elementId: 'cv',
+      filename,
+      onProgress: (step: string) => {
+        generationStep.value = step
+      },
+      onError: (error: Error) => {
+        console.error('Erreur lors de la génération du PDF:', error)
+        alert('Erreur lors de la génération du PDF. Veuillez réessayer.')
       },
     })
-
-    const imgData = canvas.toDataURL('image/png', 1.0)
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4',
-      compress: false,
-    })
-
-    const imgWidth = 210
-    const imgHeight = 297
-
-    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST')
-
-    pdf.save(`CV_${profilData.personal.firstName}_${profilData.personal.lastName}.pdf`)
   } catch (error) {
     console.error('Erreur lors de la génération du PDF:', error)
     alert('Erreur lors de la génération du PDF. Veuillez réessayer.')
   } finally {
     isGeneratingPDF.value = false
+    generationStep.value = ''
   }
 }
 
@@ -110,7 +75,9 @@ onMounted(async () => {
       >
         <span v-if="!isGeneratingPDF" class="text-xl mr-2">⬇️</span>
         <Loader2 v-if="isGeneratingPDF" class="w-4 h-4 mr-2 animate-spin" />
-        {{ isGeneratingPDF ? 'Génération en cours...' : 'Télécharger le CV (PDF)' }}
+        {{
+          isGeneratingPDF ? generationStep || 'Génération en cours...' : 'Télécharger le CV (PDF)'
+        }}
       </Button>
     </div>
 
