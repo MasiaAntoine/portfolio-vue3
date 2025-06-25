@@ -7,13 +7,18 @@ import { ref, onMounted } from 'vue'
 import QRCode from 'qrcode'
 import html2canvas from 'html2canvas-pro'
 import jsPDF from 'jspdf'
+import { Button } from '@/components/ui/button'
+import { Loader2 } from 'lucide-vue-next'
 
 const getLevelStars = (level: number) => {
   return Array.from({ length: 5 }, (_, i) => i < level)
 }
 
+const isGeneratingPDF = ref(false)
+
 const downloadCV = async () => {
   try {
+    isGeneratingPDF.value = true
     const element = document.getElementById('cv')
     if (!element) return
 
@@ -49,6 +54,8 @@ const downloadCV = async () => {
   } catch (error) {
     console.error('Erreur lors de la génération du PDF:', error)
     alert('Erreur lors de la génération du PDF. Veuillez réessayer.')
+  } finally {
+    isGeneratingPDF.value = false
   }
 }
 
@@ -74,13 +81,17 @@ onMounted(async () => {
   <div class="min-h-screen bg-gray-50 py-8 px-4">
     <!-- Bouton de téléchargement -->
     <div class="max-w-4xl mx-auto mb-6">
-      <button
+      <Button
         @click="downloadCV"
-        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-lg"
+        :disabled="isGeneratingPDF"
+        variant="gradient"
+        size="lg"
+        class="shadow-lg"
       >
-        <span class="text-xl">⬇️</span>
-        Télécharger le CV (PDF)
-      </button>
+        <span v-if="!isGeneratingPDF" class="text-xl mr-2">⬇️</span>
+        <Loader2 v-if="isGeneratingPDF" class="w-4 h-4 mr-2 animate-spin" />
+        {{ isGeneratingPDF ? 'Génération en cours...' : 'Télécharger le CV (PDF)' }}
+      </Button>
     </div>
 
     <!-- CV Container -->
