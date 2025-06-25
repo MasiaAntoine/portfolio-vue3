@@ -5,15 +5,64 @@ import { education } from '@/shared/Education'
 import { experiences } from '@/shared/Experiences'
 import { ref, onMounted } from 'vue'
 import QRCode from 'qrcode'
+import html2canvas from 'html2canvas-pro'
+import jsPDF from 'jspdf'
 
 // Fonction pour générer les étoiles de niveau
 const getLevelStars = (level: number) => {
   return Array.from({ length: 5 }, (_, i) => i < level)
 }
 
-// Fonction pour imprimer le CV
-const printCV = () => {
-  window.print()
+// Fonction pour télécharger le CV en PDF
+const downloadCV = async () => {
+  try {
+    const element = document.getElementById('cv')
+    if (!element) return
+
+    // Générer le canvas avec html2canvas-pro
+    const canvas = await html2canvas(element, {
+      scale: 2, // Meilleure qualité
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      width: element.scrollWidth,
+      height: element.scrollHeight,
+    })
+
+    // Créer le PDF avec jsPDF
+    const imgData = canvas.toDataURL('image/png')
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4',
+    })
+
+    // Calculer les dimensions pour ajuster à A4
+    const imgWidth = 210 // A4 width in mm
+    const pageHeight = 297 // A4 height in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width
+    let heightLeft = imgHeight
+
+    let position = 0
+
+    // Ajouter la première page
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+    heightLeft -= pageHeight
+
+    // Ajouter des pages supplémentaires si nécessaire
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight
+      pdf.addPage()
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+      heightLeft -= pageHeight
+    }
+
+    // Télécharger le PDF
+    pdf.save(`CV_${profilData.personal.firstName}_${profilData.personal.lastName}.pdf`)
+  } catch (error) {
+    console.error('Erreur lors de la génération du PDF:', error)
+    alert('Erreur lors de la génération du PDF. Veuillez réessayer.')
+  }
 }
 
 // QR Code
@@ -38,19 +87,19 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-gray-50 py-8 px-4">
-    <!-- Bouton d'impression -->
+    <!-- Bouton de téléchargement -->
     <div class="max-w-4xl mx-auto mb-6">
       <button
-        @click="printCV"
+        @click="downloadCV"
         class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-lg"
       >
-        <span class="text-xl">🖨️</span>
-        Imprimer le CV
+        <span class="text-xl">⬇️</span>
+        Télécharger le CV (PDF)
       </button>
     </div>
 
     <!-- CV Container -->
-    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden relative">
+    <div id="cv" class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden relative">
       <!-- En-tête -->
       <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4">
         <div class="flex flex-col md:flex-row items-center gap-3">
