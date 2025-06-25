@@ -8,6 +8,11 @@ const router = createRouter({
       name: 'home',
       component: () => import('../views/HomeView.vue'),
     },
+    {
+      path: '/cv-preview',
+      name: 'cv-preview',
+      component: () => import('../views/CvPreviewView.vue'),
+    },
   ],
 })
 

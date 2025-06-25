@@ -38,6 +38,7 @@ export const experiences: Experience[] = [
       'Développement Android',
     ],
     color: 'blue',
+    cv: true,
   },
   {
     id: 2,
@@ -50,6 +51,7 @@ export const experiences: Experience[] = [
       "Stage de développement web axé sur les technologies backend et frontend. Développement d'applications web avec PHP et JavaScript, gestion de bases de données SQL, et apprentissage de la programmation orientée objet.",
     skills: ['PHP', 'HTML5', 'JavaScript', 'CSS3', 'SQL', 'Programmation orientée objet (POO)'],
     color: 'green',
+    cv: true,
   },
   {
     id: 3,
@@ -72,5 +74,6 @@ export const experiences: Experience[] = [
       'Programmation orientée objet (POO)',
     ],
     color: 'purple',
+    cv: true,
   },
 ]

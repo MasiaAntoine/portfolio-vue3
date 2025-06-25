@@ -29,6 +29,7 @@ export const education: Education[] = [
     badgeBg: 'bg-blue-100 text-blue-800',
     icon: '🎓',
     category: 'diploma',
+    cv: true,
   },
   {
     id: 2,
@@ -50,6 +51,7 @@ export const education: Education[] = [
     badgeBg: 'bg-green-100 text-green-800',
     icon: '📚',
     category: 'diploma',
+    cv: true,
   },
   {
     id: 3,
@@ -64,6 +66,7 @@ export const education: Education[] = [
     badgeBg: 'bg-purple-100 text-purple-800',
     icon: '🏆',
     category: 'certification',
+    cv: true,
   },
   {
     id: 4,
@@ -78,6 +81,7 @@ export const education: Education[] = [
     badgeBg: 'bg-orange-100 text-orange-800',
     icon: '🚗',
     category: 'license',
+    cv: true,
   },
   {
     id: 5,
@@ -92,6 +96,7 @@ export const education: Education[] = [
     badgeBg: 'bg-red-100 text-red-800',
     icon: '🛡️',
     category: 'certification',
+    cv: true,
   },
   {
     id: 6,
