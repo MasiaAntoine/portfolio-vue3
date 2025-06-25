@@ -40,7 +40,7 @@ onMounted(() => {
 
       <!-- Description courte -->
       <div
-        class="max-w-2xl mx-auto transform transition-all duration-1000 delay-500 relative z-10 flex gap-4 items-center"
+        class="max-w-2xl mx-auto transform transition-all duration-1000 delay-500 relative z-10 flex flex-col sm:flex-row gap-4 items-center"
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
         <p class="text-lg text-gray-700 leading-relaxed">
