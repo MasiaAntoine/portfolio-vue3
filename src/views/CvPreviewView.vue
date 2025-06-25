@@ -97,16 +97,16 @@ onMounted(async () => {
     <!-- CV Container -->
     <div
       id="cv"
-      class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden relative h-[1122px]"
+      class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden relative h-[1122px] font-inter"
     >
       <!-- En-tête -->
       <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-3 h-[120px]">
         <div class="flex flex-col md:flex-row items-center gap-2 h-full">
           <div class="flex-1">
-            <h1 class="text-xl font-bold mb-1">
+            <h1 class="text-2xl font-bold mb-1">
               {{ profilData.personal.firstName }} {{ profilData.personal.lastName }}
             </h1>
-            <h2 class="text-xs font-light mb-1 opacity-90">
+            <h2 class="text-lg font-light mb-1 opacity-90">
               {{ profilData.personal.title }}
             </h2>
             <p class="text-[10px] leading-relaxed opacity-90 w-[90%]">
@@ -228,7 +228,7 @@ onMounted(async () => {
                 <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
                 Compétences clés
               </h3>
-              <div class="space-y-2">
+              <div class="space-y-3">
                 <div v-for="category in skills" :key="category.name">
                   <div v-if="category.skills.filter((skill) => skill.cv).length > 0">
                     <h4 class="text-xs font-semibold text-gray-700 mb-1">{{ category.name }}</h4>
@@ -365,6 +365,8 @@ onMounted(async () => {
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @media print {
   body {
     background: white !important;
@@ -379,6 +381,20 @@ onMounted(async () => {
   }
 }
 
+/* Police personnalisée */
+.font-inter {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    sans-serif;
+}
+
 /* Classe utilitaire pour limiter le texte */
 .line-clamp-2 {
   display: -webkit-box;
@@ -390,7 +406,10 @@ onMounted(async () => {
 
 /* Amélioration du rendu pour PDF */
 #cv {
-  font-feature-settings: 'kern' 1;
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1,
+    'calt' 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -398,31 +417,57 @@ onMounted(async () => {
 
 #cv * {
   letter-spacing: 0.01em;
-  word-spacing: 0.05em;
+  word-spacing: 0.02em;
+}
+
+/* Amélioration des titres */
+#cv h1,
+#cv h2,
+#cv h3,
+#cv h4 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 /* Espacement spécifique pour les petits textes */
 #cv .text-\[10px\] {
-  letter-spacing: 0.02em;
-  word-spacing: 0.08em;
+  letter-spacing: 0.015em;
+  word-spacing: 0.04em;
   line-height: 1.4;
+  font-weight: 400;
 }
 
 #cv .text-xs {
-  letter-spacing: 0.015em;
-  word-spacing: 0.06em;
-  line-height: 1.3;
+  letter-spacing: 0.01em;
+  word-spacing: 0.03em;
+  line-height: 1.35;
+  font-weight: 400;
 }
 
 #cv .text-\[8px\] {
-  letter-spacing: 0.025em;
-  word-spacing: 0.1em;
+  letter-spacing: 0.02em;
+  word-spacing: 0.06em;
   line-height: 1.5;
+  font-weight: 400;
 }
 
 #cv .text-\[9px\] {
-  letter-spacing: 0.02em;
-  word-spacing: 0.08em;
+  letter-spacing: 0.015em;
+  word-spacing: 0.04em;
   line-height: 1.4;
+  font-weight: 400;
+}
+
+/* Amélioration des textes en gras */
+#cv .font-bold {
+  font-weight: 600;
+}
+
+#cv .font-semibold {
+  font-weight: 500;
+}
+
+#cv .font-medium {
+  font-weight: 500;
 }
 </style>
