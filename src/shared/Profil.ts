@@ -1,3 +1,14 @@
+import { Linkedin, Github, Instagram, type LucideIcon } from 'lucide-vue-next'
+import { presentationSkills } from './Skills'
+
+export interface SocialNetwork {
+  name: string
+  url: string
+  icon: LucideIcon
+  colorClass: string
+  hoverColorClass: string
+}
+
 export interface ProfilData {
   personal: {
     firstName: string
@@ -19,6 +30,7 @@ export interface ProfilData {
     phone: string
     location: string
     socialDescription: string
+    socialNetworks: SocialNetwork[]
   }
 }
 
@@ -37,7 +49,7 @@ export const profilData: ProfilData = {
   },
   stats: {
     yearsOfExperience: 11,
-    technologiesMastered: 30,
+    technologiesMastered: presentationSkills.length,
     diploma: 'BTS SIO',
   },
   qualities: ['Créatif', 'Rigoureux', 'Innovant', 'Collaboratif', 'Autodidacte', 'Déterminé'],
@@ -47,5 +59,28 @@ export const profilData: ProfilData = {
     location: 'Toulouse, France',
     socialDescription:
       "N'hésitez pas à me contacter pour discuter d'opportunités, de projets ou simplement pour échanger sur le développement web.",
+    socialNetworks: [
+      {
+        name: 'LinkedIn',
+        url: 'https://fr.linkedin.com/in/antoine-masia-403a17228',
+        icon: Linkedin,
+        colorClass: 'bg-blue-600',
+        hoverColorClass: 'hover:bg-blue-700',
+      },
+      {
+        name: 'GitHub',
+        url: 'https://github.com/MasiaAntoine',
+        icon: Github,
+        colorClass: 'bg-gray-800',
+        hoverColorClass: 'hover:bg-gray-700',
+      },
+      {
+        name: 'Instagram',
+        url: 'https://www.instagram.com/antoine.masia/',
+        icon: Instagram,
+        colorClass: 'bg-pink-600',
+        hoverColorClass: 'hover:bg-pink-700',
+      },
+    ],
   },
 }

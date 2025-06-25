@@ -33,6 +33,11 @@ const copyToClipboard = async (text: string) => {
     document.body.removeChild(textArea)
   }
 }
+
+// Fonction pour ouvrir un lien dans un nouvel onglet
+const openSocialLink = (url: string) => {
+  window.open(url, '_blank', 'noopener,noreferrer')
+}
 </script>
 
 <template>
@@ -130,19 +135,17 @@ const copyToClipboard = async (text: string) => {
         <h3 class="font-semibold text-gray-800 mb-4">Suivez-moi</h3>
         <div class="flex space-x-4">
           <button
-            class="w-12 h-12 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
+            v-for="social in profilData.contact.socialNetworks"
+            :key="social.name"
+            @click="openSocialLink(social.url)"
+            :class="[
+              'w-12 h-12 text-white rounded-lg transition-colors flex items-center justify-center',
+              social.colorClass,
+              social.hoverColorClass,
+            ]"
+            :title="social.name"
           >
-            <span class="text-xl">💼</span>
-          </button>
-          <button
-            class="w-12 h-12 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-center"
-          >
-            <span class="text-xl">🐙</span>
-          </button>
-          <button
-            class="w-12 h-12 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors flex items-center justify-center"
-          >
-            <span class="text-xl">🐦</span>
+            <component :is="social.icon" class="w-5 h-5" />
           </button>
         </div>
       </div>
