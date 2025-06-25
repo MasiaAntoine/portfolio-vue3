@@ -11,35 +11,42 @@ export const CarouselMenu = [
     id: 1,
     name: 'Présentation',
     component: PresentationComponent,
+    anchor: 'presentation',
   },
   {
     id: 2,
     name: 'À propos',
     component: AboutComponent,
+    anchor: 'about',
   },
   {
     id: 3,
     name: 'Compétences',
     component: SkillsComponent,
+    anchor: 'skills',
   },
   {
     id: 4,
     name: 'Projets',
     component: ProjectsComponent,
+    anchor: 'projects',
   },
   {
     id: 5,
     name: 'Expériences',
     component: ExperienceComponent,
+    anchor: 'experience',
   },
   {
     id: 6,
     name: 'Formation',
     component: EducationComponent,
+    anchor: 'education',
   },
   {
     id: 7,
     name: 'Contact',
     component: ContactComponent,
+    anchor: 'contact',
   },
 ]

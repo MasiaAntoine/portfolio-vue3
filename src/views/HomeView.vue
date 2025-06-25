@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { watchOnce } from '@vueuse/core'
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import {
   Carousel,
   type CarouselApi,
@@ -12,6 +13,8 @@ import {
 import { Circle } from 'lucide-vue-next'
 import { CarouselMenu } from '@/datas/CarouselMenu'
 
+const route = useRoute()
+const router = useRouter()
 const emblaMainApi = ref<CarouselApi>()
 const selectedIndex = ref(0)
 
@@ -19,7 +22,14 @@ function onSelect() {
   if (!emblaMainApi.value) return
   selectedIndex.value = emblaMainApi.value.selectedScrollSnap()
 
-  // Remonter le scroll tout en haut à chaque changement d'item
+  const currentItem = CarouselMenu[selectedIndex.value]
+  if (currentItem) {
+    const newHash = `#${currentItem.anchor}`
+    if (route.hash !== newHash) {
+      router.replace({ path: route.path, hash: newHash })
+    }
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
@@ -28,12 +38,42 @@ function onThumbClick(index: number) {
   emblaMainApi.value.scrollTo(index)
 }
 
+function navigateToAnchor(anchor: string) {
+  const index = CarouselMenu.findIndex((item) => item.anchor === anchor)
+  if (index !== -1 && emblaMainApi.value) {
+    emblaMainApi.value.scrollTo(index)
+  }
+}
+
+watch(
+  () => route.hash,
+  (newHash) => {
+    if (newHash && newHash.startsWith('#')) {
+      const anchor = newHash.substring(1)
+      navigateToAnchor(anchor)
+    }
+  },
+  { immediate: true },
+)
+
+onMounted(() => {
+  if (route.hash) {
+    const anchor = route.hash.substring(1)
+    navigateToAnchor(anchor)
+  }
+})
+
 watchOnce(emblaMainApi, (emblaMainApi) => {
   if (!emblaMainApi) return
 
   onSelect()
   emblaMainApi.on('select', onSelect)
   emblaMainApi.on('reInit', onSelect)
+
+  if (route.hash) {
+    const anchor = route.hash.substring(1)
+    navigateToAnchor(anchor)
+  }
 })
 </script>
 
