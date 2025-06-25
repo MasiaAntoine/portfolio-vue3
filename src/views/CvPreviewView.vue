@@ -24,8 +24,13 @@ const downloadCV = async () => {
 
     await document.fonts.ready
 
+    const fontFaces = Array.from(document.fonts.values())
+    const interFonts = fontFaces.filter((font) => font.family.includes('Inter'))
+
+    await Promise.all(interFonts.map((font) => font.load()))
+
     const canvas = await html2canvas(element, {
-      scale: 5,
+      scale: 4,
       useCORS: true,
       allowTaint: true,
       backgroundColor: '#ffffff',
@@ -35,20 +40,35 @@ const downloadCV = async () => {
       logging: false,
       removeContainer: false,
       foreignObjectRendering: false,
+      onclone: (clonedDoc) => {
+        const clonedElement = clonedDoc.getElementById('cv')
+        if (clonedElement) {
+          clonedElement.style.fontFamily =
+            'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+
+          const allElements = clonedElement.querySelectorAll('*')
+          allElements.forEach((el: HTMLElement) => {
+            if (el.style) {
+              el.style.fontFamily =
+                'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+            }
+          })
+        }
+      },
     })
 
-    // Créer le PDF avec jsPDF
-    const imgData = canvas.toDataURL('image/png')
+    const imgData = canvas.toDataURL('image/png', 1.0)
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
       format: 'a4',
+      compress: false,
     })
 
     const imgWidth = 210
     const imgHeight = 297
 
-    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight)
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST')
 
     pdf.save(`CV_${profilData.personal.firstName}_${profilData.personal.lastName}.pdf`)
   } catch (error) {
@@ -365,7 +385,46 @@ onMounted(async () => {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Police personnalisée - Suppression de l'import car déjà dans index.html */
+.font-inter {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    sans-serif;
+}
+
+/* Application globale de la police Inter pour le CV */
+#cv {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    sans-serif;
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1,
+    'calt' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cv * {
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em;
+}
 
 @media print {
   body {
@@ -381,20 +440,6 @@ onMounted(async () => {
   }
 }
 
-/* Police personnalisée */
-.font-inter {
-  font-family:
-    'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    'Roboto',
-    'Oxygen',
-    'Ubuntu',
-    'Cantarell',
-    sans-serif;
-}
-
 /* Classe utilitaire pour limiter le texte */
 .line-clamp-2 {
   display: -webkit-box;
@@ -402,22 +447,6 @@ onMounted(async () => {
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* Amélioration du rendu pour PDF */
-#cv {
-  font-feature-settings:
-    'kern' 1,
-    'liga' 1,
-    'calt' 1;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#cv * {
-  letter-spacing: 0.01em;
-  word-spacing: 0.02em;
 }
 
 /* Amélioration des titres */
