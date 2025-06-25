@@ -4,13 +4,20 @@ import { skills } from '@/datas/Skills'
 import { education } from '@/datas/Education'
 import { experiences } from '@/datas/Experiences'
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import QRCode from 'qrcode'
 import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-vue-next'
+import { Loader2, ArrowLeft } from 'lucide-vue-next'
 import { generatePDF, sanitizeFilename } from '@/shared/utils'
+
+const router = useRouter()
 
 const getLevelStars = (level: number) => {
   return Array.from({ length: 5 }, (_, i) => i < level)
+}
+
+const goBackToContact = () => {
+  router.push({ name: 'home', hash: '#contact' })
 }
 
 const isGeneratingPDF = ref(false)
@@ -64,8 +71,13 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-gray-50 py-8 px-4">
-    <!-- Bouton de téléchargement -->
-    <div class="max-w-4xl mx-auto mb-6">
+    <!-- Boutons de navigation -->
+    <div class="max-w-4xl mx-auto mb-6 flex justify-between items-center">
+      <Button @click="goBackToContact" variant="outline" size="lg" class="shadow-md">
+        <ArrowLeft class="w-4 h-4 mr-2" />
+        Retour
+      </Button>
+
       <Button
         @click="downloadCV"
         :disabled="isGeneratingPDF"
@@ -351,7 +363,7 @@ onMounted(async () => {
   </div>
 </template>
 
-<style>
+<style scoped>
 /* Police personnalisée - Suppression de l'import car déjà dans index.html */
 .font-inter {
   font-family:
