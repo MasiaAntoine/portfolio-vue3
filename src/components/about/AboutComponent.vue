@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { profilData } from '@/shared/Profil'
+</script>
+
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center pt-8 pb-18 max-w-6xl mx-auto">
     <h1 class="text-4xl font-bold text-gray-800 mb-8">À propos de moi</h1>
@@ -5,38 +9,34 @@
     <!-- Description personnelle détaillée -->
     <div class="max-w-4xl mx-auto">
       <p class="text-lg text-gray-700 leading-relaxed mb-4">
-        <em class="text-blue-600 font-medium">
-          "Les erreurs d'hier sont les leçons d'aujourd'hui pour le développeur de demain."
-        </em>
+        <em class="text-blue-600 font-medium"> "{{ profilData.personal.quote }}" </em>
       </p>
       <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        Diplômé du BTS SIO (Bac+2), passionné de code depuis 2014, je suis devenu un développeur
-        déterminé, polyvalent et autodidacte. Ma passion pour le développement est un moteur
-        puissant qui alimente la créativité et la résolution de problèmes. Toujours en quête
-        d'apprentissage, ma créativité, ma logique et mon autonomie me permettent de trouver des
-        solutions originales avec diverses technologies modernes.
+        {{ profilData.personal.aboutDescription }}
       </p>
     </div>
 
     <!-- Qualités personnelles -->
     <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <span class="px-6 py-3 bg-blue-100 text-blue-800 rounded-full text-lg font-medium">
-        Créatif
-      </span>
-      <span class="px-6 py-3 bg-green-100 text-green-800 rounded-full text-lg font-medium">
-        Rigoureux
-      </span>
-      <span class="px-6 py-3 bg-purple-100 text-purple-800 rounded-full text-lg font-medium">
-        Innovant
-      </span>
-      <span class="px-6 py-3 bg-orange-100 text-orange-800 rounded-full text-lg font-medium">
-        Collaboratif
-      </span>
-      <span class="px-6 py-3 bg-teal-100 text-teal-800 rounded-full text-lg font-medium">
-        Autodidacte
-      </span>
-      <span class="px-6 py-3 bg-pink-100 text-pink-800 rounded-full text-lg font-medium">
-        Déterminé
+      <span
+        v-for="(quality, index) in profilData.qualities"
+        :key="quality"
+        :class="[
+          'px-6 py-3 rounded-full text-lg font-medium',
+          index % 6 === 0
+            ? 'bg-blue-100 text-blue-800'
+            : index % 6 === 1
+              ? 'bg-green-100 text-green-800'
+              : index % 6 === 2
+                ? 'bg-purple-100 text-purple-800'
+                : index % 6 === 3
+                  ? 'bg-orange-100 text-orange-800'
+                  : index % 6 === 4
+                    ? 'bg-teal-100 text-teal-800'
+                    : 'bg-pink-100 text-pink-800',
+        ]"
+      >
+        {{ quality }}
       </span>
     </div>
 
@@ -54,15 +54,7 @@
           Minecraft, mon premier pas en programmation
         </h3>
         <p class="text-gray-700 leading-relaxed text-center">
-          Je suis passionné par la programmation depuis ma découverte de Minecraft, où j'ai été
-          fasciné par la façon dont les commandes et les scripts pouvaient être utilisés pour créer
-          des mondes uniques et complexes. Cette découverte a été le catalyseur de ma passion pour
-          le développement, me montrant que
-          <span class="font-semibold text-green-600">
-            la programmation est une passion passionnante et gratifiante
-          </span>
-          qui offre une grande polyvalence pour créer des choses incroyables et résoudre des
-          problèmes complexes.
+          {{ profilData.personal.minecraftDescription }}
         </p>
       </div>
     </div>

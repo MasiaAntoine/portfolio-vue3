@@ -1,20 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { profilData } from '@/shared/Profil'
 
 // États réactifs pour contrôler l'affichage
 const showEmail = ref(false)
 const showPhone = ref(false)
 const showLocation = ref(false)
-
-// Données encodées (pour éviter la détection par les bots)
-const emailParts = ['pro', '.', 'antoine', '.', 'masia', '@', 'gmail', '.', 'com']
-const phoneParts = ['+33', ' ', '6', ' ', '15', ' ', '80', ' ', '40', ' ', '64']
-const locationParts = ['Toulouse', ', ', 'France']
-
-// Valeurs computed pour reconstruire les informations
-const email = emailParts.join('')
-const phone = phoneParts.join('')
-const location = locationParts.join('')
 
 // Fonctions pour révéler les informations
 const revealEmail = () => {
@@ -53,8 +44,7 @@ const copyToClipboard = async (text: string) => {
       <div>
         <h2 class="text-2xl font-semibold text-gray-800 mb-6">Restons en contact</h2>
         <p class="text-gray-600 mb-8">
-          N'hésitez pas à me contacter pour discuter d'opportunités, de projets ou simplement pour
-          échanger sur le développement web.
+          {{ profilData.contact.socialDescription }}
         </p>
       </div>
 
@@ -75,9 +65,9 @@ const copyToClipboard = async (text: string) => {
               </button>
             </div>
             <div v-else class="mt-2">
-              <p class="text-gray-600">{{ email }}</p>
+              <p class="text-gray-600">{{ profilData.contact.email }}</p>
               <button
-                @click="copyToClipboard(email)"
+                @click="copyToClipboard(profilData.contact.email)"
                 class="mt-1 px-3 py-1 bg-gray-200 text-gray-700 rounded text-xs hover:bg-gray-300 transition-colors"
               >
                 Copier
@@ -102,9 +92,9 @@ const copyToClipboard = async (text: string) => {
               </button>
             </div>
             <div v-else class="mt-2">
-              <p class="text-gray-600">{{ phone }}</p>
+              <p class="text-gray-600">{{ profilData.contact.phone }}</p>
               <button
-                @click="copyToClipboard(phone)"
+                @click="copyToClipboard(profilData.contact.phone)"
                 class="mt-1 px-3 py-1 bg-gray-200 text-gray-700 rounded text-xs hover:bg-gray-300 transition-colors"
               >
                 Copier
@@ -129,7 +119,7 @@ const copyToClipboard = async (text: string) => {
               </button>
             </div>
             <div v-else class="mt-2">
-              <p class="text-gray-600">{{ location }}</p>
+              <p class="text-gray-600">{{ profilData.contact.location }}</p>
             </div>
           </div>
         </div>

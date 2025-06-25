@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { presentationSkills } from '@/shared/Skills'
+import { profilData } from '@/shared/Profil'
 import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-vue-next'
 
@@ -26,12 +27,13 @@ onMounted(() => {
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
         <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-4">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600"
-            >Masia</span
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600"
+            >{{ profilData.personal.lastName }}</span
           >
-          Antoine
+          {{ profilData.personal.firstName }}
         </h1>
-        <p class="text-xl md:text-2xl text-gray-600 font-light">Développeur Full Stack passionné</p>
+        <p class="text-xl md:text-2xl text-gray-600 font-light">{{ profilData.personal.title }}</p>
       </div>
 
       <!-- Description courte -->
@@ -40,9 +42,7 @@ onMounted(() => {
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
         <p class="text-lg text-gray-700 leading-relaxed mb-8">
-          Développeur Full Stack passionné depuis 2014, spécialisé dans la création de solutions web
-          modernes et innovantes. Toujours en quête d'apprentissage et de nouveaux défis
-          technologiques.
+          {{ profilData.personal.description }}
         </p>
       </div>
 
@@ -99,17 +99,21 @@ onMounted(() => {
         :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-8 opacity-0': !isVisible }"
       >
         <div class="text-center">
-          <div class="text-3xl font-bold text-blue-600 mb-2">11+</div>
+          <div class="text-3xl font-bold text-blue-600 mb-2">
+            {{ profilData.stats.yearsOfExperience }}+
+          </div>
           <div class="text-gray-600">Années de passion</div>
         </div>
 
         <div class="text-center">
-          <div class="text-3xl font-bold text-green-600 mb-2">{{ presentationSkills.length }}+</div>
+          <div class="text-3xl font-bold text-green-600 mb-2">
+            {{ profilData.stats.technologiesMastered }}+
+          </div>
           <div class="text-gray-600">Technologies maîtrisées</div>
         </div>
 
         <div class="text-center">
-          <div class="text-3xl font-bold text-purple-600 mb-2">BTS SIO</div>
+          <div class="text-3xl font-bold text-purple-600 mb-2">{{ profilData.stats.diploma }}</div>
           <div class="text-gray-600">Diplômé</div>
         </div>
       </div>
