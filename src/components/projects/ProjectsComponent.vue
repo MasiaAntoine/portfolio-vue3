@@ -29,24 +29,28 @@
             </span>
           </div>
           <div class="flex gap-3">
-            <a
+            <Button
               v-if="project.githubUrl"
+              :as="'a'"
               :href="project.githubUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors text-center"
+              variant="secondary"
+              class="flex-1"
             >
               Voir le code
-            </a>
-            <a
+            </Button>
+            <Button
               v-if="project.demoUrl"
+              :as="'a'"
               :href="project.demoUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center"
+              variant="default"
+              class="flex-1"
             >
               Demo
-            </a>
+            </Button>
           </div>
         </div>
       </div>
@@ -56,6 +60,7 @@
 
 <script setup lang="ts">
 import { projects } from '@/shared/Projects'
+import { Button } from '@/components/ui/button'
 
 // Fonction pour obtenir la couleur selon la technologie
 const getTechColor = (tech: string): string => {
