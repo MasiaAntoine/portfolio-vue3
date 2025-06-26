@@ -110,7 +110,15 @@ onUnmounted(() => {
         <div
           v-for="(experience, index) in experiences"
           :key="experience.id"
-          :ref="(el) => (experienceRefs[index] = el)"
+          :ref="
+            (el) => {
+              if (el && (el as any)?.$el) {
+                experienceRefs[index] = (el as any).$el as HTMLElement
+              } else if (el && typeof (el as any).getBoundingClientRect === 'function') {
+                experienceRefs[index] = el as HTMLElement
+              }
+            }
+          "
           class="relative flex items-start experience-item"
           :class="{ 'animate-in': visibleItems.includes(index) }"
         >

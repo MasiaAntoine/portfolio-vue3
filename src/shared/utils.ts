@@ -10,7 +10,6 @@ export async function generatePDF(options: PdfGenerationOptions): Promise<void> 
     useCORS = true,
     allowTaint = true,
     backgroundColor = '#ffffff',
-    letterRendering = true,
     logging = false,
     removeContainer = false,
     foreignObjectRendering = false,
@@ -50,7 +49,6 @@ export async function generatePDF(options: PdfGenerationOptions): Promise<void> 
       backgroundColor,
       width: element.scrollWidth,
       height: element.scrollHeight,
-      letterRendering,
       logging,
       removeContainer,
       foreignObjectRendering,
@@ -60,9 +58,9 @@ export async function generatePDF(options: PdfGenerationOptions): Promise<void> 
           clonedElement.style.fontFamily = fontFamily
 
           const allElements = clonedElement.querySelectorAll('*')
-          allElements.forEach((el: HTMLElement) => {
-            if (el.style) {
-              el.style.fontFamily = fontFamily
+          allElements.forEach((el: Element) => {
+            if ((el as HTMLElement).style) {
+              ;(el as HTMLElement).style.fontFamily = fontFamily
             }
           })
         }

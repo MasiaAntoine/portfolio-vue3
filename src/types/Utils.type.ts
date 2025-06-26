@@ -5,7 +5,6 @@ export interface PdfGenerationOptions {
   useCORS?: boolean
   allowTaint?: boolean
   backgroundColor?: string
-  letterRendering?: boolean
   logging?: boolean
   removeContainer?: boolean
   foreignObjectRendering?: boolean
