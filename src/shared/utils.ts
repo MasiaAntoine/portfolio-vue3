@@ -1,24 +1,6 @@
 import html2canvas from 'html2canvas-pro'
 import jsPDF from 'jspdf'
-
-export interface PdfGenerationOptions {
-  elementId: string
-  filename: string
-  scale?: number
-  useCORS?: boolean
-  allowTaint?: boolean
-  backgroundColor?: string
-  letterRendering?: boolean
-  logging?: boolean
-  removeContainer?: boolean
-  foreignObjectRendering?: boolean
-  orientation?: 'portrait' | 'landscape'
-  format?: string | number[]
-  compress?: boolean
-  fontFamily?: string
-  onProgress?: (step: string) => void
-  onError?: (error: Error) => void
-}
+import type { PdfGenerationOptions } from '@/types'
 
 export async function generatePDF(options: PdfGenerationOptions): Promise<void> {
   const {

@@ -1,0 +1,6 @@
+export * from '@/types/Education.type'
+export * from '@/types/Experience.type'
+export * from '@/types/Profil.type'
+export * from '@/types/Project.type'
+export * from '@/types/Skill.type'
+export * from '@/types/Utils.type'
