@@ -23,5 +23,5 @@ import { profilData } from '@/datas/Profil'
 </template>
 
 <style scoped>
-@import '@/assets/cv.css';
+@import '@/assets/css/cv.css';
 </style>

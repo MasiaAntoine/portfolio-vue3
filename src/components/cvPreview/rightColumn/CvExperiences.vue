@@ -47,5 +47,5 @@ import { experiences } from '@/datas/Experiences'
 </template>
 
 <style scoped>
-@import '@/assets/cv.css';
+@import '@/assets/css/cv.css';
 </style>

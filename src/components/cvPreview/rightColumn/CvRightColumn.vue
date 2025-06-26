@@ -12,5 +12,5 @@ import CvEducation from './CvEducation.vue'
 </template>
 
 <style scoped>
-@import '@/assets/cv.css';
+@import '@/assets/css/cv.css';
 </style>
