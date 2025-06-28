@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { experiences } from '@/datas/Experiences'
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
-import { getTechColor } from '@/lib/utils'
+import TagCustom from '@/components/generic/TagCustom.vue'
 
 const timelineContainer = ref<HTMLElement>()
 const experienceRefs = ref<HTMLElement[]>([])
@@ -142,14 +142,7 @@ onUnmounted(() => {
             <p class="text-gray-500 text-sm mb-2">{{ experience.location }}</p>
             <p class="text-gray-600 mb-4">{{ experience.description }}</p>
             <div class="flex flex-wrap gap-2">
-              <span
-                v-for="skill in experience.skills"
-                :key="skill"
-                :class="getTechColor(skill)"
-                class="px-3 py-1 text-sm rounded-full hover:scale-105 transition-all duration-200"
-              >
-                {{ skill }}
-              </span>
+              <TagCustom v-for="skill in experience.skills" :key="skill" :tag="skill" />
             </div>
           </div>
         </div>

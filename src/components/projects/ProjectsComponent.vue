@@ -20,14 +20,7 @@
               {{ project.description }}
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span
-                v-for="tech in project.technologies"
-                :key="tech"
-                :class="getTechColor(tech)"
-                class="px-3 py-1 text-sm rounded-full"
-              >
-                {{ tech }}
-              </span>
+              <TagCustom v-for="tech in project.technologies" :key="tech" :tag="tech" />
             </div>
           </div>
           <div class="flex gap-3">
@@ -63,5 +56,5 @@
 <script setup lang="ts">
 import { projects } from '@/datas/Projects'
 import { Button } from '@/components/ui/button'
-import { getTechColor } from '@/lib/utils'
+import TagCustom from '@/components/generic/TagCustom.vue'
 </script>

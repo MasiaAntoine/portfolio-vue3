@@ -31,13 +31,7 @@
           {{ edu.details }}
         </div>
         <div class="flex flex-wrap gap-2">
-          <span
-            v-for="skill in edu.skills"
-            :key="skill"
-            class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200 transition-colors"
-          >
-            {{ skill }}
-          </span>
+          <TagCustom v-for="skill in edu.skills" :key="skill" :tag="skill" size="sm" />
         </div>
       </div>
     </div>
@@ -46,4 +40,5 @@
 
 <script setup lang="ts">
 import { education } from '@/datas/Education'
+import TagCustom from '@/components/generic/TagCustom.vue'
 </script>
