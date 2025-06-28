@@ -8,7 +8,7 @@
       <div
         v-for="edu in education"
         :key="edu.id"
-        class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+        class="bg-white rounded-lg shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-shadow duration-300"
       >
         <div class="flex items-center mb-4">
           <div

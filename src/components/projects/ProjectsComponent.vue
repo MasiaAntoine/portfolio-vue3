@@ -8,7 +8,7 @@
       <div
         v-for="project in projects"
         :key="project.id"
-        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full"
+        class="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full"
       >
         <div :class="`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center`">
           <span class="text-white text-2xl font-bold">{{ project.displayName }}</span>

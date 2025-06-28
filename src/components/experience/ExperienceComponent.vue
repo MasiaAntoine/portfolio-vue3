@@ -127,7 +127,9 @@ onUnmounted(() => {
             :class="`absolute left-6 w-4 h-4 bg-${experience.color}-600 rounded-full border-4 border-white shadow-lg z-10 timeline-dot`"
             :style="{ opacity: visibleItems.includes(index) ? 1 : 0 }"
           ></div>
-          <div class="ml-20 bg-white rounded-lg shadow-lg p-6 w-full experience-card">
+          <div
+            class="ml-20 bg-white rounded-lg shadow-lg border border-gray-200 p-6 w-full experience-card"
+          >
             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
               <h3 class="text-xl font-semibold text-gray-800">{{ experience.title }}</h3>
               <span
