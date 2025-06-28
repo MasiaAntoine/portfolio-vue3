@@ -8,25 +8,27 @@
       <div
         v-for="project in projects"
         :key="project.id"
-        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full"
       >
         <div :class="`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center`">
           <span class="text-white text-2xl font-bold">{{ project.displayName }}</span>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ project.title }}</h3>
-          <p class="text-gray-600 mb-4">
-            {{ project.description }}
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span
-              v-for="tech in project.technologies"
-              :key="tech"
-              :class="getTechColor(tech)"
-              class="px-3 py-1 text-sm rounded-full"
-            >
-              {{ tech }}
-            </span>
+        <div class="p-6 flex flex-col justify-between h-[calc(100%-12rem)]">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ project.title }}</h3>
+            <p class="text-gray-600 mb-4">
+              {{ project.description }}
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                v-for="tech in project.technologies"
+                :key="tech"
+                :class="getTechColor(tech)"
+                class="px-3 py-1 text-sm rounded-full"
+              >
+                {{ tech }}
+              </span>
+            </div>
           </div>
           <div class="flex gap-3">
             <Button

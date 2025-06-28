@@ -18,7 +18,7 @@ const getLevelStars = (level: number) => {
       <div
         v-for="category in skills"
         :key="category.name"
-        class="bg-white rounded-lg shadow-lg p-6 h-80 overflow-y-auto"
+        class="bg-white rounded-lg shadow-lg border border-gray-200 p-6 h-80 overflow-y-auto"
       >
         <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
           <span :class="`w-3 h-3 rounded-full mr-3 ${category.color}`"></span>
