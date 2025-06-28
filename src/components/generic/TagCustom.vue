@@ -1,9 +1,3 @@
-<template>
-  <span :class="[getTechColor(tag), sizeClass]" class="font-medium">
-    {{ tag }}
-  </span>
-</template>
-
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
 
@@ -97,3 +91,9 @@ function getTechColor(tech: string): string {
   return colorMap[tech] || 'bg-gray-100 text-gray-800'
 }
 </script>
+
+<template>
+  <span :class="[getTechColor(tag), sizeClass]" class="font-medium">
+    {{ tag }}
+  </span>
+</template>
