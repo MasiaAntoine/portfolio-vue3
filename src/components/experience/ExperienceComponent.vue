@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { experiences } from '@/datas/Experiences'
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { getTechColor } from '@/lib/utils'
 
 const timelineContainer = ref<HTMLElement>()
 const experienceRefs = ref<HTMLElement[]>([])
@@ -144,7 +145,8 @@ onUnmounted(() => {
               <span
                 v-for="skill in experience.skills"
                 :key="skill"
-                class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 transition-colors"
+                :class="getTechColor(skill)"
+                class="px-3 py-1 text-sm rounded-full hover:scale-105 transition-all duration-200"
               >
                 {{ skill }}
               </span>

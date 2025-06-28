@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: 'Blue Antivirus',
     description:
       'Application antivirus multi-plateforme pour Windows et macOS développée avec Vue.js, TypeScript et Shadcn pour le frontend, Rust pour le backend et Tauri pour la compilation desktop. Protection complète du système avec interface moderne et intuitive.',
-    technologies: ['Vue.js', 'TypeScript', 'Rust', 'Tauri', 'Shadcn'],
+    technologies: ['Vue 3', 'TypeScript', 'Rust', 'Tauri', 'Shadcn'],
     gradient: 'from-cyan-400 to-blue-500',
     displayName: 'Blue',
     demoUrl: 'https://blue.masia-antoine.fr/',
@@ -57,7 +57,7 @@ export const projects: Project[] = [
     title: 'Arts Portfolio',
     description:
       'Site de présentation de mes peintures et créations artistiques. Interface élégante et moderne développée avec Vue.js et Tailwind CSS pour mettre en valeur mes œuvres avec une galerie interactive et responsive.',
-    technologies: ['Vue.js', 'Tailwind CSS'],
+    technologies: ['Vue 3', 'Tailwind CSS'],
     gradient: 'from-pink-400 to-purple-500',
     displayName: 'Arts',
     githubUrl: 'https://github.com/MasiaAntoine/arts',
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     title: 'Soy Club',
     description:
       "Application mobile multiplateforme développée en équipe pour iOS et Android. Utilise Vue.js avec Shadcn pour l'interface utilisateur, Tailwind CSS pour le design et Capacitor pour la compilation native. Projet réalisé en contexte professionnel.",
-    technologies: ['Vue.js', 'Shadcn', 'Tailwind CSS', 'Capacitor', 'iOS', 'Android'],
+    technologies: ['Vue 3', 'Shadcn', 'Tailwind CSS', 'Capacitor', 'iOS', 'Android'],
     gradient: 'from-emerald-400 to-teal-500',
     displayName: 'Soy Club',
   },

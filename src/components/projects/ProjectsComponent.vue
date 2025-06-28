@@ -63,42 +63,5 @@
 <script setup lang="ts">
 import { projects } from '@/datas/Projects'
 import { Button } from '@/components/ui/button'
-
-const getTechColor = (tech: string): string => {
-  const colorMap: Record<string, string> = {
-    'Vue 3': 'bg-green-100 text-green-800',
-    'Vue.js': 'bg-green-100 text-green-800',
-    TypeScript: 'bg-blue-100 text-blue-800',
-    Tailwind: 'bg-purple-100 text-purple-800',
-    'Tailwind CSS': 'bg-purple-100 text-purple-800',
-    'Node.js': 'bg-yellow-100 text-yellow-800',
-    MongoDB: 'bg-green-100 text-green-800',
-    React: 'bg-cyan-100 text-cyan-800',
-    'Chart.js': 'bg-blue-100 text-blue-800',
-    Express: 'bg-red-100 text-red-800',
-    Shadcn: 'bg-slate-100 text-slate-800',
-    Rust: 'bg-orange-100 text-orange-800',
-    Tauri: 'bg-amber-100 text-amber-800',
-    Laravel: 'bg-red-100 text-red-800',
-    PHP: 'bg-indigo-100 text-indigo-800',
-    MySQL: 'bg-blue-100 text-blue-800',
-    'REST API': 'bg-teal-100 text-teal-800',
-    Postman: 'bg-orange-100 text-orange-800',
-    Arduino: 'bg-cyan-100 text-cyan-800',
-    ESP32: 'bg-purple-100 text-purple-800',
-    'C++': 'bg-blue-100 text-blue-800',
-    WiFi: 'bg-green-100 text-green-800',
-    HX711: 'bg-yellow-100 text-yellow-800',
-    IoT: 'bg-emerald-100 text-emerald-800',
-    PWA: 'bg-violet-100 text-violet-800',
-    'Web Development': 'bg-gray-100 text-gray-800',
-    HTML: 'bg-orange-100 text-orange-800',
-    CSS: 'bg-blue-100 text-blue-800',
-    Capacitor: 'bg-indigo-100 text-indigo-800',
-    iOS: 'bg-gray-100 text-gray-800',
-    Android: 'bg-green-100 text-green-800',
-  }
-
-  return colorMap[tech] || 'bg-gray-100 text-gray-800'
-}
+import { getTechColor } from '@/lib/utils'
 </script>
