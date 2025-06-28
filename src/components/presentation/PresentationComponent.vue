@@ -58,7 +58,7 @@ onMounted(() => {
           <div
             v-for="skill in presentationSkills.slice(0, 10)"
             :key="skill.name"
-            class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300 relative z-10"
+            class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl hover:scale-110 transition-all duration-300 relative z-10 cursor-grab"
           >
             <div :class="`size-8 ${skill.color} rounded-full flex items-center justify-center`">
               <span class="text-white text-xs font-bold">{{ skill.icon }}</span>
@@ -66,13 +66,13 @@ onMounted(() => {
             <span class="font-medium text-gray-800">{{ skill.name }}</span>
           </div>
 
-          <transition-group name="fade-slide" tag="div" class="contents">
+          <transition-group name="fade-slide" tag="div" class="flex flex-wrap justify-center gap-4">
             <div
               v-for="(skill, index) in presentationSkills.slice(10)"
               v-show="showAllSkills"
               :key="skill.name"
-              class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl transition-shadow duration-300"
-              :style="showAllSkills ? { transitionDelay: `${index * 50}ms` } : {}"
+              class="bg-white shadow-lg rounded-full px-6 py-3 flex items-center space-x-2 hover:shadow-xl hover:scale-110 transition-all duration-300 cursor-grab skill-delayed"
+              :style="showAllSkills ? { '--delay': `${index * 50}ms` } : {}"
             >
               <div :class="`size-8 ${skill.color} rounded-full flex items-center justify-center`">
                 <span class="text-white text-xs font-bold">{{ skill.icon }}</span>
@@ -124,26 +124,27 @@ onMounted(() => {
 
 <style scoped>
 .fade-slide-enter-active {
-  transition: all 0.4s ease-out;
+  transition: opacity 0.4s ease-out;
 }
 
 .fade-slide-leave-active {
-  transition: none;
+  transition: opacity 0.2s ease-in;
 }
 
 .fade-slide-enter-from {
   opacity: 0;
-  transform: translateY(-10px) scale(0.9);
 }
 
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-10px) scale(0.9);
 }
 
 .fade-slide-enter-to,
 .fade-slide-leave-from {
   opacity: 1;
-  transform: translateY(0) scale(1);
+}
+
+.skill-delayed.fade-slide-enter-active {
+  transition-delay: var(--delay);
 }
 </style>
