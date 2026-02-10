@@ -54,15 +54,20 @@ export async function generatePDF(options: PdfGenerationOptions): Promise<void> 
       foreignObjectRendering,
       onclone: (clonedDoc) => {
         const clonedElement = clonedDoc.getElementById(elementId)
-        if (clonedElement && fontFamily) {
-          clonedElement.style.fontFamily = fontFamily
+        if (clonedElement) {
+          // Retirer les bords arrondis pour le PDF
+          ;(clonedElement as HTMLElement).style.borderRadius = '0'
+          
+          if (fontFamily) {
+            ;(clonedElement as HTMLElement).style.fontFamily = fontFamily
 
-          const allElements = clonedElement.querySelectorAll('*')
-          allElements.forEach((el: Element) => {
-            if ((el as HTMLElement).style) {
-              ;(el as HTMLElement).style.fontFamily = fontFamily
-            }
-          })
+            const allElements = clonedElement.querySelectorAll('*')
+            allElements.forEach((el: Element) => {
+              if ((el as HTMLElement).style) {
+                ;(el as HTMLElement).style.fontFamily = fontFamily
+              }
+            })
+          }
         }
       },
     })

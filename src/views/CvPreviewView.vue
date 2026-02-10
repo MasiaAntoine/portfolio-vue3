@@ -115,6 +115,14 @@ const downloadCV = async () => {
   height: 1122px;
   min-width: 794px;
   flex-shrink: 0;
+  border-radius: 8px;
+}
+
+/* Retirer les bords arrondis lors de l'impression/génération PDF */
+@media print {
+  .cv-a4-container {
+    border-radius: 0;
+  }
 }
 
 /* Sur mobile, centrer le CV et permettre le scroll */
