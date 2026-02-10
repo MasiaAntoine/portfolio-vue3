@@ -1,5 +1,25 @@
 <script setup lang="ts">
 import { experiences } from '@/datas/Experiences'
+import { computed } from 'vue'
+
+// Calculer la taille de police globale en fonction de la description la plus longue
+const globalDescriptionClass = computed(() => {
+  const cvExperiences = experiences.filter((exp) => exp.cv === true).slice(0, 3)
+  const maxLength = Math.max(...cvExperiences.map((exp) => exp.description.length))
+  
+  // Si la description la plus longue dépasse 280 caractères, toutes utilisent une police très petite
+  if (maxLength > 280) {
+    return 'text-[8px] leading-tight'
+  }
+  // Si la description la plus longue dépasse 200 caractères, toutes utilisent une police petite
+  else if (maxLength > 200) {
+    return 'text-[9px] leading-snug'
+  }
+  // Sinon, toutes utilisent la taille normale
+  else {
+    return 'text-[10px] leading-snug'
+  }
+})
 </script>
 
 <template>
@@ -11,7 +31,7 @@ import { experiences } from '@/datas/Experiences'
     </h3>
     <div class="space-y-3">
       <div
-        v-for="experience in experiences.filter((exp) => exp.cv === true)"
+        v-for="experience in experiences.filter((exp) => exp.cv === true).slice(0, 3)"
         :key="experience.id"
         class="border-l-2 border-gray-200 pl-4 relative"
       >
@@ -29,7 +49,7 @@ import { experiences } from '@/datas/Experiences'
             <span>📍 {{ experience.location }}</span>
           </div>
         </div>
-        <p class="text-gray-700 text-[11px] leading-relaxed mb-2">
+        <p :class="['text-gray-700 mb-2', globalDescriptionClass]">
           {{ experience.description }}
         </p>
         <div class="flex flex-wrap gap-0.5">
