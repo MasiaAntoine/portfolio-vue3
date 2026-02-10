@@ -5,7 +5,7 @@ import CvEducation from './CvEducation.vue'
 
 <template>
   <!-- Colonne de droite -->
-  <div class="col-span-2 p-4 flex flex-col gap-5">
+  <div class="col-span-2 p-4 flex flex-col justify-between h-full">
     <CvExperiences />
     <CvEducation />
   </div>

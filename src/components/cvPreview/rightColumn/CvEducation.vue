@@ -7,11 +7,11 @@ const globalDescriptionClass = computed(() => {
   const cvEducation = education
     .filter((e) => (e.category === 'diploma' || e.category === 'certification') && e.cv === true)
     .slice(0, 4)
-  
+
   const maxLength = Math.max(
     ...cvEducation.map((edu) => (edu.description || '').length + (edu.details || '').length)
   )
-  
+
   // Si la description la plus longue dépasse 280 caractères, toutes utilisent une police très petite
   if (maxLength > 280) {
     return 'text-[7px] leading-tight'
@@ -34,7 +34,7 @@ const globalDescriptionClass = computed(() => {
       <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
       Formation & Certifications
     </h3>
-    <div class="space-y-2">
+    <div class="space-y-5">
       <div
         v-for="edu in education
           .filter(
@@ -42,7 +42,7 @@ const globalDescriptionClass = computed(() => {
           )
           .slice(0, 4)"
         :key="edu.id"
-        class="border rounded p-2.5 bg-gray-50 flex items-start gap-2"
+        class="border rounded p-2.5 bg-gray-50 flex items-start gap-2 education-item"
       >
         <span class="text-base">{{ edu.icon }}</span>
         <div class="flex-1">

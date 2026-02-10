@@ -6,7 +6,7 @@ import { computed } from 'vue'
 const globalDescriptionClass = computed(() => {
   const cvExperiences = experiences.filter((exp) => exp.cv === true).slice(0, 3)
   const maxLength = Math.max(...cvExperiences.map((exp) => exp.description.length))
-  
+
   // Si la description la plus longue dépasse 280 caractères, toutes utilisent une police très petite
   if (maxLength > 280) {
     return 'text-[8px] leading-tight'
@@ -29,11 +29,11 @@ const globalDescriptionClass = computed(() => {
       <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
       Expériences professionnelles
     </h3>
-    <div class="space-y-3">
+    <div class="space-y-5">
       <div
         v-for="experience in experiences.filter((exp) => exp.cv === true).slice(0, 3)"
         :key="experience.id"
-        class="border-l-2 border-gray-200 pl-4 relative"
+        class="border-l-2 border-gray-200 pl-4 relative experience-item"
       >
         <div
           :class="`absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-${experience.color}-600`"

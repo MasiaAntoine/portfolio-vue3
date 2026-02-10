@@ -10,7 +10,7 @@ import CvQrCode from './CvQrCode.vue'
 <template>
   <!-- Colonne de gauche -->
   <div class="bg-gray-50 flex flex-col p-4 justify-between">
-    <div class="col-span-1 flex flex-col gap-4">
+    <div class="col-span-1 flex flex-col gap-6">
       <CvAbout />
       <CvContact />
       <CvSocialNetworks />
