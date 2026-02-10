@@ -5,7 +5,7 @@ export const education: Education[] = [
     id: 1,
     title: 'Mastère Expert en Sécurité des Développements Informatiques',
     institution: 'LiveCampus',
-    date: 'Novembre 2025 - Décembre 2026',
+    date: 'En cours',
     description:
       "Formation Bac+5 (RNCP niveau 7) spécialisée dans la conception, le développement et la sécurisation d'applications web, mobiles et cloud avec une approche Security by Design.",
     details:
@@ -32,7 +32,7 @@ export const education: Education[] = [
     id: 2,
     title: 'Titre RNCP De Niveau 6 - Développeur Full Stack & Data',
     institution: 'LiveCampus',
-    date: 'Novembre 2023 - Novembre 2025',
+    date: 'Novembre 2025',
     description:
       "Formation Bac+4 (RNCP niveau 6) en alternance visant à acquérir une maîtrise complète du développement web (front-end et back-end) tout en intégrant des compétences en data et DevOps.",
     details:

@@ -9,5 +9,6 @@ export interface Skill {
 export interface SkillCategory {
   name: string
   color: string
+  cv?: boolean
   skills: Skill[]
 }

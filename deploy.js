@@ -17,23 +17,8 @@ function run(command, message) {
   execSync(command, { stdio: 'inherit' })
 }
 
-function createHtaccess() {
-  console.log('\x1b[36m› Creating .htaccess file...\x1b[0m')
-  const htaccessContent = `<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>`
-
-  fs.writeFileSync(path.join(DIST_DIR, '.htaccess'), htaccessContent)
-}
-
 try {
   run('pnpm build', 'Building Vue app')
-  createHtaccess()
 
   run(
     `ssh -i ${SSH_KEY_PATH} -p ${REMOTE_PORT} ${REMOTE_USER}@${REMOTE_HOST} "rm -rf ${REMOTE_PATH}/*"`,
@@ -41,7 +26,7 @@ try {
   )
 
   run(
-    `scp -i ${SSH_KEY_PATH} -P ${REMOTE_PORT} -r ${DIST_DIR}/* ${DIST_DIR}/.htaccess ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}`,
+    `scp -i ${SSH_KEY_PATH} -P ${REMOTE_PORT} -r ${DIST_DIR}/* ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}`,
     'Deploying to Hostinger',
   )
 

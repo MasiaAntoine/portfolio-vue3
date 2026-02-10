@@ -14,7 +14,7 @@ const getLevelStars = (level: number) => {
       Compétences clés
     </h3>
     <div class="space-y-4">
-      <div v-for="category in skills" :key="category.name">
+      <div v-for="category in skills.filter((cat) => cat.cv !== false)" :key="category.name">
         <div v-if="category.skills.filter((skill) => skill.cv).length > 0">
           <h4 class="text-[11px] font-semibold text-gray-700 mb-1">{{ category.name }}</h4>
           <div class="space-y-1">
