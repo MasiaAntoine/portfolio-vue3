@@ -50,8 +50,8 @@ const downloadCV = async () => {
 <template>
   <div class="min-h-screen bg-gray-50 py-8 px-4">
     <!-- Boutons de navigation -->
-    <div class="max-w-4xl mx-auto mb-6 flex justify-between items-center">
-      <Button @click="goBackToContact" variant="outline" size="lg" class="shadow-md">
+    <div class="cv-controls-container mb-6 flex justify-between items-center gap-2">
+      <Button @click="goBackToContact" variant="outline" size="lg" class="shadow-md shrink-0">
         <ArrowLeft class="w-4 h-4 mr-2" />
         Retour
       </Button>
@@ -61,7 +61,7 @@ const downloadCV = async () => {
         :disabled="isGeneratingPDF"
         variant="gradient"
         size="lg"
-        class="shadow-lg"
+        class="shadow-lg shrink-0"
       >
         <span v-if="!isGeneratingPDF" class="text-xl mr-2">⬇️</span>
         <Loader2 v-if="isGeneratingPDF" class="w-4 h-4 mr-2 animate-spin" />
@@ -71,16 +71,19 @@ const downloadCV = async () => {
       </Button>
     </div>
 
-    <!-- CV Container -->
-    <div
-      id="cv"
-      class="max-w-4xl mx-auto bg-white shadow-2xl overflow-hidden relative h-[1122px] font-inter"
-    >
-      <CvHeader />
+    <!-- CV Container Wrapper -->
+    <div class="cv-wrapper">
+      <!-- CV Container -->
+      <div
+        id="cv"
+        class="cv-a4-container bg-white shadow-2xl overflow-hidden relative font-inter"
+      >
+        <CvHeader />
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 h-[1002px]">
-        <CvLeftColumn />
-        <CvRightColumn />
+        <div class="grid grid-cols-3 gap-0 h-[1002px]">
+          <CvLeftColumn />
+          <CvRightColumn />
+        </div>
       </div>
     </div>
   </div>
@@ -88,4 +91,62 @@ const downloadCV = async () => {
 
 <style scoped>
 @import '@/assets/css/cv.css';
+
+/* Container pour les contrôles */
+.cv-controls-container {
+  max-width: 794px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Wrapper pour permettre le scroll horizontal sur mobile */
+.cv-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+/* Container A4 avec dimensions fixes */
+.cv-a4-container {
+  /* Format A4 : 210mm x 297mm à 96 DPI = 794px x 1122px */
+  width: 794px;
+  height: 1122px;
+  min-width: 794px;
+  flex-shrink: 0;
+}
+
+/* Sur mobile, centrer le CV et permettre le scroll */
+@media (max-width: 850px) {
+  .cv-wrapper {
+    justify-content: flex-start;
+    padding-left: max(1rem, calc((100vw - 794px) / 2));
+    padding-right: 1rem;
+  }
+
+  .cv-controls-container {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+}
+
+/* Amélioration du scroll sur mobile */
+.cv-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cv-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.cv-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.cv-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 </style>

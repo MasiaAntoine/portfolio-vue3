@@ -5,7 +5,7 @@ import { profilData } from '@/datas/Profil'
 <template>
   <!-- Qualités -->
   <div>
-    <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+    <h3 class="text-xs font-bold text-gray-800 mb-2 flex items-center">
       <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
       Qualités
     </h3>
@@ -14,7 +14,7 @@ import { profilData } from '@/datas/Profil'
         v-for="(quality, index) in profilData.qualities"
         :key="quality"
         :class="[
-          'px-2 py-0.5 rounded-full text-[10px] font-medium',
+          'px-2 py-0.5 rounded-full text-[9px] font-medium',
           index % 6 === 0
             ? 'bg-blue-100 text-blue-800'
             : index % 6 === 1

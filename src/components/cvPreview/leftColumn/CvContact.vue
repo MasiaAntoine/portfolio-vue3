@@ -5,11 +5,11 @@ import { profilData } from '@/datas/Profil'
 <template>
   <!-- Contact -->
   <div>
-    <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+    <h3 class="text-xs font-bold text-gray-800 mb-2 flex items-center">
       <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></span>
       Contact
     </h3>
-    <div class="space-y-1.5 text-xs">
+    <div class="space-y-1.5 text-[11px]">
       <div class="flex items-center gap-1.5">
         <span class="text-blue-600">📧</span>
         <span class="text-gray-700">{{ profilData.contact.email }}</span>

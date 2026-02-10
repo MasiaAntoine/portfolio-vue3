@@ -31,7 +31,7 @@ onMounted(async () => {
         alt="QR Code Portfolio"
         class="size-10 mx-auto"
       />
-      <p class="text-[8px] text-gray-600 text-center mt-0.5">
+      <p class="text-[7px] text-gray-600 text-center mt-0.5">
         {{ profilData.personal.urlPortfolio }}
       </p>
     </div>
