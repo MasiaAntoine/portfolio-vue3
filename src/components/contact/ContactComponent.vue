@@ -5,17 +5,12 @@ import { profilData } from '@/datas/Profil'
 import { Button } from '@/components/ui/button'
 
 const showEmail = ref(false)
-const showPhone = ref(false)
 const showLocation = ref(false)
 
 const router = useRouter()
 
 const revealEmail = () => {
   showEmail.value = true
-}
-
-const revealPhone = () => {
-  showPhone.value = true
 }
 
 const revealLocation = () => {
@@ -78,33 +73,6 @@ const downloadCV = async () => {
                 <p class="text-gray-600">{{ profilData.contact.email }}</p>
                 <button
                   @click="copyToClipboard(profilData.contact.email)"
-                  class="mt-1 px-3 py-1 bg-gray-200 text-gray-700 rounded text-xs hover:bg-gray-300 transition-colors"
-                >
-                  Copier
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Téléphone -->
-          <div class="flex items-center space-x-4">
-            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <span class="text-green-600 text-xl">📱</span>
-            </div>
-            <div class="flex-1">
-              <h3 class="font-semibold text-gray-800">Téléphone</h3>
-              <div v-if="!showPhone" class="mt-2">
-                <button
-                  @click="revealPhone"
-                  class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
-                >
-                  Révéler le téléphone
-                </button>
-              </div>
-              <div v-else class="mt-2">
-                <p class="text-gray-600">{{ profilData.contact.phone }}</p>
-                <button
-                  @click="copyToClipboard(profilData.contact.phone)"
                   class="mt-1 px-3 py-1 bg-gray-200 text-gray-700 rounded text-xs hover:bg-gray-300 transition-colors"
                 >
                   Copier

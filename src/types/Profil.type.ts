@@ -27,7 +27,6 @@ export interface ProfilData {
   qualities: string[]
   contact: {
     email: string
-    phone: string
     location: string
     socialDescription: string
     socialNetworks: SocialNetwork[]

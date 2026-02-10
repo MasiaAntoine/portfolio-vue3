@@ -15,10 +15,6 @@ import { profilData } from '@/datas/Profil'
         <span class="text-gray-700">{{ profilData.contact.email }}</span>
       </div>
       <div class="flex items-center gap-1.5">
-        <span class="text-blue-600">📱</span>
-        <span class="text-gray-700">{{ profilData.contact.phone }}</span>
-      </div>
-      <div class="flex items-center gap-1.5">
         <span class="text-blue-600">📍</span>
         <span class="text-gray-700">{{ profilData.contact.location }}</span>
       </div>

@@ -24,7 +24,6 @@ export const profilData: ProfilData = {
   qualities: ['Créatif', 'Rigoureux', 'Innovant', 'Collaboratif', 'Autodidacte', 'Déterminé'],
   contact: {
     email: 'pro.antoine.masia@gmail.com',
-    phone: '+33 6 15 80 40 64',
     location: 'Toulouse, France',
     socialDescription:
       "N'hésitez pas à me contacter pour discuter d'opportunités, de projets ou simplement pour échanger sur le développement web.",
