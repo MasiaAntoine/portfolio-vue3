@@ -14,7 +14,6 @@ Portfolio personnel développé avec **Vue 3**, **TypeScript** et **Tailwind CSS
 - Responsive design (mobile, tablette, desktop)
 - Composants UI réutilisables (boutons, cards, carousel…)
 - SEO optimisé (balises meta, Open Graph, JSON-LD)
-- Déploiement automatisé (script `deploy.js`)
 
 ## 🛠️ Technologies utilisées
 
@@ -54,9 +53,11 @@ pnpm build
 
 Les fichiers seront générés dans le dossier `dist/`.
 
-## 🚀 Déploiement
+La publication sur https://portfolio.masia-antoine.fr se fait depuis `deploiement` :
 
-Un script `deploy.js` permet de déployer automatiquement le site sur un serveur distant via SSH (Hostinger). Les variables d’environnement sont à configurer dans un fichier `.env`.
+```bash
+./scripts/deploy.sh portfolio-vue3 proxy
+```
 
 ## 📁 Structure du projet
 
@@ -89,7 +90,6 @@ public/             # Fichiers statiques
 - `pnpm dev` : Lancer le serveur de dev
 - `pnpm build` : Build production
 - `pnpm preview` : Prévisualiser le build
-- `node deploy.js` : Déployer sur le serveur distant
 
 ## 👤 Auteur
 

@@ -1,0 +1,11 @@
+# Production — portfolio (VPS)
+# Seul le port 8100 est publié. Le proxy sert https://portfolio.masia-antoine.fr.
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "8100:80"
+    restart: unless-stopped
